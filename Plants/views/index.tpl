@@ -51,7 +51,7 @@ document.getElementById("demo").innerHTML = text;
    <input type="button" onclick="" value="Editar">
    <input type="button" onclick="location.href='/inicio';" value="Añadir">
 
-  
+  <p></p>
    
 </body>
 </html>
