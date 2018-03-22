@@ -12,7 +12,7 @@ type PlantController struct {
 }
 
 func (c *PlantController) Get() {
-	fmt.Println("hola he llegado al get")
+	//fmt.Println("hola he llegado al get")
 	c.TplName = "añadir.tpl"
 	var taula []models.Plantas
 	models.DB.Table("plantas").Select("tipo,cantidad,duracion").Scan(&taula)

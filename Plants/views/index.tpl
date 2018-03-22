@@ -9,7 +9,6 @@
   <link rel = 'stylesheet' href = '/static/css/estilo.css'>
    
 </head>
-
 <body>
 
   <header>
@@ -47,11 +46,26 @@ document.getElementById("demo").innerHTML = text;
   </footer>
   <div class="backdrop"></div>
 
-   <input type="button" onclick="alert('¿Estas seguro que deseas eliminar el objeto?')" value="Eliminar"> 
+
+   <input type="button"  onclick="myFunction()" value="Eliminar">
+
+  <script>
+  function myFunction() {
+     var r = confirm("¿Estas seguro?");
+    if (r == true) {
+      
+        location.href= "/eliminar?"
+    } else {
+        location.href= "/"
+    }
+    //document.getElementById("demo").innerHTML = txt;
+  }
+  </script> 
+  
+    
    <input type="button" onclick="" value="Editar">
    <input type="button" onclick="location.href='/inicio';" value="Añadir">
 
-  <p></p>
    
 </body>
 </html>

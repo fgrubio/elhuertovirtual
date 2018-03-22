@@ -10,4 +10,5 @@ func init() {
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/inicio", &controllers.PlantController{})
 	beego.Router("/crear", &controllers.PlantController{}, "get:Crear")
+	beego.Router("/eliminar", &controllers.PlantController{}, "get:BorrarPlanta")
 }
