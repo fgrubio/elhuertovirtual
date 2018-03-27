@@ -47,13 +47,13 @@ document.getElementById("demo").innerHTML = text;
   <div class="backdrop"></div>
 
 
-  <input type="button"  onclick="location.href='/elim'" value="Eliminar">
+  <input type="button"  onclick="fuera()" value="Eliminar">
 
     <script>
     function fuera() {
       var r = confirm("¿Estas seguro?");
       if (r == true) {
-          location.href= '/elim'
+          location.href= '/elim' 
       } else {
           location.href= "/"
       }
@@ -63,7 +63,7 @@ document.getElementById("demo").innerHTML = text;
   
     
    <input type="button" onclick="" value="Editar">
-   <input type="button" onclick="location.href='/inicio';" value="Añadir">
+   <input type="button" onclick="location.href='/añade';" value="Añadir">
 
    
 </body>

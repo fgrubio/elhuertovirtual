@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"Plants/models"
+	"elhuertovirtual/Plants/models"
 	"fmt"
 
 	"github.com/astaxie/beego"
