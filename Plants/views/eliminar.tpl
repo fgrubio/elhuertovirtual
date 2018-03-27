@@ -1,38 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.alert {
-    padding: 20px;
-    background-color: #f44336;
-    color: white;
-}
 
-.closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.closebtn:hover {
-    color: black;
-}
-</style>
 </head>
 <body>
 
-<h2>Alert Messages</h2>
-
-<p>Click on the "x" symbol to close the alert message.</p>
 <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+  <strong>Aviso!</strong>Se ha eliminado el elemento 3 de la base de datos.
 </div>
 
 </body>

@@ -11,7 +11,14 @@ type PlantController struct {
 	beego.Controller
 }
 
-func (c *PlantController) Get() {
+func (c *PlantController) Elim() {
+	fmt.Println("he llegado al borrar")
+	//c.TplName = "eliminar.tpl"
+	models.Borrar(3)
+	c.Redirect("/", 302)
+}
+
+func (c *PlantController) Añade() {
 	//fmt.Println("hola he llegado al get")
 	c.TplName = "añadir.tpl"
 	var taula []models.Plantas
@@ -35,8 +42,4 @@ func (c *PlantController) Crear() {
 
 func (c *PlantController) ActualitzaPlanta() {
 	//models.Actualitzar(1, 2, 3)
-}
-
-func (c *PlantController) BorrarPlanta() {
-	models.Borrar(3)
 }

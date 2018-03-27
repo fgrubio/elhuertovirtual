@@ -47,20 +47,19 @@ document.getElementById("demo").innerHTML = text;
   <div class="backdrop"></div>
 
 
-   <input type="button"  onclick="myFunction()" value="Eliminar">
+  <input type="button"  onclick="location.href='/elim'" value="Eliminar">
 
-  <script>
-  function myFunction() {
-     var r = confirm("¿Estas seguro?");
-    if (r == true) {
-      
-        location.href= "/eliminar?"
-    } else {
-        location.href= "/"
+    <script>
+    function fuera() {
+      var r = confirm("¿Estas seguro?");
+      if (r == true) {
+          location.href= '/elim'
+      } else {
+          location.href= "/"
+      }
+      //document.getElementById("demo").innerHTML = txt;
     }
-    //document.getElementById("demo").innerHTML = txt;
-  }
-  </script> 
+    </script> 
   
     
    <input type="button" onclick="" value="Editar">
