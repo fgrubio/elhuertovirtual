@@ -15,56 +15,43 @@
 
     <h1 class="logo">Huerto</h1>
      <p>
-     
-    {{map_get .tipos 0}}  {{map_get .cant 0}}  {{map_get .dur 0}}<br>
-    {{map_get .tipos 1}}  {{map_get .cant 1}}  {{map_get .dur 1}}<br>
-    {{map_get .tipos 2}}  {{map_get .cant 2}}  {{map_get .dur 2}}<br>
+     <input type="button" onclick="location.href='/añade';" value="Añadir">
+</header>
+     <table>
+  <tr>
+    <th>Tipo</th>
+    <th>Cantidad</th>
+    <th>Duración</th>
+  </tr>
+  <tr></tr>
+   {{range $key, $val := .taula}}
+    <td>{{$val.Tipo}}</td>
+    <td>{{$val.Cantidad}}</td>
+    <td>{{$val.Duracion}}</td>
+    <td><input type="button" onclick="editar({{$val.ID}})" value="Editar"></td>
+    <td><input type="button" onclick="eliminar({{$val.ID}})" value="Eliminar"></td>
+   </tr>
+    {{end}}
+</table>
     </p>
 
-<p id="demo"></p>
-
-<script>
-var text = "";
-var i;
-for (i = 0; i < 3; i++) {
-    text += "{{map_get .tipos 0}}";
-}
-document.getElementById("demo").innerHTML = text;
-</script>
-
-   <div class="description">
-   </div>
-  </header>
- 
-
-  <footer>
-    <div class="author">
-      <a href="localhost:8080">{{.Website}}</a> 
-      <br>
-      <a class="email" href="mailto:{{.Email}}">{{.Email}}</a>
-    </div>
-  </footer>
-  <div class="backdrop"></div>
-
-
-  <input type="button"  onclick="fuera()" value="Eliminar">
-
     <script>
-    function fuera() {
-      var r = confirm("¿Estas seguro?");
+    function editar(s) {
+      location.href= "/edit?key=" + s;
+    }
+    </script>
+    
+    <script>
+    function eliminar(s) {
+      var r = confirm("¿Estas seguro que quieres eliminarlo?");
       if (r == true) {
-          location.href= '/elim' 
+          location.href= "/elim?key=" + s;
       } else {
           location.href= "/"
       }
       //document.getElementById("demo").innerHTML = txt;
     }
     </script> 
-  
-    
-   <input type="button" onclick="" value="Editar">
-   <input type="button" onclick="location.href='/añade';" value="Añadir">
-
    
 </body>
 </html>

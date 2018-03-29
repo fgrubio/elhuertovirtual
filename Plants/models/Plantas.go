@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+
 	"github.com/jinzhu/gorm"
 )
 
@@ -21,10 +23,10 @@ type Tabla struct {
 	Duracion int
 }
 
-func Actualitzar(id int, quantitat int, duracio int) {
-
-	DB.Model(&Plantas{}).Where("id = ?", id).Updates(map[string]interface{}{"Cantidad": quantitat, "Duracion": duracio})
-
+func Actualitzar(pl Plantas) {
+	fmt.Println("Actualizamos")
+	fmt.Println(pl)
+	DB.Model(&Plantas{}).Where("id = ?", pl.ID).Updates(map[string]interface{}{"tipo": pl.Tipo, "Cantidad": pl.Cantidad, "Duracion": pl.Duracion})
 }
 
 func Borrar(id int) {
@@ -32,9 +34,5 @@ func Borrar(id int) {
 }
 
 func Afegir(pl Plantas) {
-
-	//fmt.Println("dime el tipo:::", pl.Tipo)
-	//fmt.Println("dime3 el tipo:::", DB)
-
 	DB.Create(&pl)
 }

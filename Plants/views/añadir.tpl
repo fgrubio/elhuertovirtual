@@ -24,17 +24,20 @@
   Fecha de recogida:<br>
   <input type="text" name="fin" value="">
   <br>-->
-
-  <input type="button" onclick="location.href='/';" value="Cancelar">
   <input type="button" onclick="myFunction()" value="Añadir">
+  <input type="button" onclick="location.href='/';" value="Cancelar">
+
   
     <script>
     function myFunction() {
-        //alert();
-        location.href= "/crear?tipo="+ document.getElementById("tipo").value + 
+      var r = confirm("¿Seguro que quieres crearlo?");
+      if (r == true) {
+          location.href= "/crear?tipo="+ document.getElementById("tipo").value + 
         "&cantidad="+ document.getElementById("cantidad").value +
         "&duracion="+ document.getElementById("duracion").value;
-        
+      } else {
+          location.href= "/"
+      }       
     }
     </script>
 

@@ -20,8 +20,20 @@ func (c *PlantController) Elim() {
 	c.Redirect("/", 302)
 }
 
+func (c *PlantController) Edit() {
+	fmt.Println("He llegado al Editar")
+	key, _ := c.GetInt("key")
+	fmt.Println("Actualizaremos id = ", key)
+
+	var taula models.Plantas
+	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion").Where("id = ?", key).Scan(&taula)
+	c.Data["taula"] = &taula
+	fmt.Println(taula)
+	c.TplName = "edit.tpl"
+}
+
 func (c *PlantController) Añade() {
-	//fmt.Println("hola he llegado al get")
+	fmt.Println("hola he llegado al añadir")
 	c.TplName = "añadir.tpl"
 	var taula []models.Plantas
 	models.DB.Table("plantas").Select("tipo,cantidad,duracion").Scan(&taula)
@@ -38,10 +50,56 @@ func (c *PlantController) Crear() {
 	//planta.Fecha_ini =
 	//planta.Fecha_fin =
 
-	models.Afegir(planta)
-	c.Redirect("/", 302)
+	var count int
+	var plantab []models.Plantas
+	hayuno := false
+	models.DB.Table("plantas").Select("id,tipo,deleted_at").Where("tipo = ?", planta.Tipo).Count(&count).Scan(&plantab)
+	fmt.Println(planta.Tipo, count)
+	if count == 0 {
+		models.Afegir(planta)
+		c.Redirect("/", 302)
+	} else {
+		for i := 0; i < len(plantab) && hayuno == false; i++ {
+			if plantab[i].DeletedAt == nil {
+				fmt.Println("Se ha encontrado, NO se añade")
+				hayuno = true
+				//c.Redirect("'/erroralanadir?key=' + plantab[i].ID", 302)
+				fmt.Println("Error de Update")
+				fmt.Println("id = ", plantab[i].ID)
+				c.Data["planta"] = &plantab[i]
+				c.TplName = "error.tpl"
+			}
+		}
+		if hayuno == false {
+			fmt.Println("No se ha encontrado ninguno igual, se añade")
+			models.Afegir(planta)
+			c.Redirect("/", 302)
+		}
+	}
 }
 
-func (c *PlantController) ActualitzaPlanta() {
-	//models.Actualitzar(1, 2, 3)
+func (c *PlantController) Update() {
+	fmt.Println("he llegado al actualizar")
+
+	var planta models.Plantas
+	var integ int
+	integ, _ = c.GetInt("key")
+	planta.ID = uint(integ)
+	planta.Tipo = c.GetString("tipo")
+	planta.Cantidad, _ = c.GetInt("cantidad")
+	planta.Duracion, _ = c.GetInt("duracion")
+
+	models.Actualitzar(planta)
+	c.Redirect("/", 302)
+}
+func (c *PlantController) ErrorUpdate() {
+	fmt.Println("Error de Update")
+	key, _ := c.GetInt("key")
+	fmt.Println("id = ", key)
+
+	var taula models.Plantas
+	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion").Where("id = ?", key).Scan(&taula)
+	c.Data["planta"] = &taula
+	fmt.Println(taula)
+	c.TplName = "error.tpl"
 }
