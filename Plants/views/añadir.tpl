@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
   <link rel = 'stylesheet' href = '/static/css/es_add.css'>
-=======
-  <link rel = 'stylesheet' href = '/static/css/estilo.css'>
->>>>>>> 2f15133edd2d54dc788416f3c4081d078588f4b0
    
 </head>
 <body>

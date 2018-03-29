@@ -29,11 +29,7 @@
     <td>{{$val.Cantidad}}</td>
     <td>{{$val.Duracion}}</td>
     <td><input type="button" onclick="" value="Editar"></td>
-<<<<<<< HEAD
     <td><input type="button" onclick="fuera({{$val.ID}})" value="Eliminar"></td>
-=======
-    <td><input type="button" onclick="fuera({{$key}})" value="Eliminar"></td>
->>>>>>> 2f15133edd2d54dc788416f3c4081d078588f4b0
    </tr>
     {{end}}
 </table>
