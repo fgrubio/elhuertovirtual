@@ -15,7 +15,7 @@
 
     <h1 class="logo">Huerto</h1>
      <p>
-     <input type="button" onclick="location.href='/añade';" value="Añadir">
+    
 </header>
      <table>
   <tr>
@@ -48,6 +48,11 @@
       //document.getElementById("demo").innerHTML = txt;
     }
     </script> 
+    
+    <br><br>
+    <div align="left">
+     <input type="button" onclick="location.href='/añade';" value="Añadir Planta" class="boton">
+    </div>
    
 </body>
 </html>
