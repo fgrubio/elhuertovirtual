@@ -14,7 +14,9 @@ type PlantController struct {
 func (c *PlantController) Elim() {
 	fmt.Println("He llegado al borrar")
 	//c.TplName = "eliminar.tpl"
-	models.Borrar(3)
+	var key, _ = c.GetInt("key")
+	fmt.Println("Borrare key =", key)
+	models.Borrar(key)
 	c.Redirect("/", 302)
 }
 

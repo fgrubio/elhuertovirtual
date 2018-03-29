@@ -17,23 +17,31 @@
      <p>
      <input type="button" onclick="location.href='/añade';" value="Añadir">
 </header>
-     <br>
-     <br>
-     <br>
-    {{range $key, $val := .taula}}
-    {{$val}}
-    <input type="button" onclick="" value="Editar">
-    <input type="button" onclick="fuera()" value="Eliminar">
-    <br>
+     <table>
+  <tr>
+    <th>Tipo</th>
+    <th>Cantidad</th>
+    <th>Duración</th>
+  </tr>
+  <tr></tr>
+   {{range $key, $val := .taula}}
+    <td>{{$val.Tipo}}</td>
+    <td>{{$val.Cantidad}}</td>
+    <td>{{$val.Duracion}}</td>
+    <td><input type="button" onclick="" value="Editar"></td>
+    <td><input type="button" onclick="fuera({{$key}})" value="Eliminar"></td>
+   </tr>
     {{end}}
+</table>
     </p>
 
 
     <script>
-    function fuera() {
+    function fuera(s) {
       var r = confirm("¿Estas seguro?");
       if (r == true) {
-          location.href= '/elim' 
+          //location.href= '/elim'
+          location.href= "/elim?key=" + s;
       } else {
           location.href= "/"
       }

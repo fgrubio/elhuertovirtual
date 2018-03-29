@@ -14,6 +14,8 @@ type Plantas struct {
 }
 
 type Tabla struct {
+	//gorm.Model
+	ID       uint
 	Tipo     string
 	Cantidad int
 	Duracion int

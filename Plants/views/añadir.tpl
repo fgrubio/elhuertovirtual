@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <link rel = 'stylesheet' href = '/static/css/estilo.css'>
+   
+</head>
 <body>
 
 <!-- <p>This form will be submitted using the GET method:</p> -->
