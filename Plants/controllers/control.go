@@ -12,7 +12,7 @@ type PlantController struct {
 }
 
 func (c *PlantController) Elim() {
-	fmt.Println("he llegado al borrar")
+	fmt.Println("He llegado al borrar")
 	//c.TplName = "eliminar.tpl"
 	models.Borrar(3)
 	c.Redirect("/", 302)

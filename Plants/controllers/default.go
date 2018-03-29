@@ -19,24 +19,27 @@ func (c *MainController) Get() {
 
 	var taula []models.Tabla
 	models.DB.Table("plantas").Select("tipo,cantidad,duracion").Scan(&taula)
+	/*
+		mapiTipo := make(map[int]string)
+		mapiCant := make(map[int]int)
+		mapiDur := make(map[int]int)
 
-	mapiTipo := make(map[int]string)
-	mapiCant := make(map[int]int)
-	mapiDur := make(map[int]int)
+		for i := 0; i < len(taula); i++ {
+			fmt.Println("funciono en la iteracion: ", i, ", taula[i] = ", taula[i])
+			mapiTipo[i] = taula[i].Tipo
+			mapiDur[i] = taula[i].Duracion
+			mapiCant[i] = taula[i].Cantidad
+		}*/
 
-	for i := 0; i < 3; i++ {
-		fmt.Println("funciono en la iteracion: ", i)
-		mapiTipo[i] = taula[i].Tipo
-		mapiDur[i] = taula[i].Duracion
-		mapiCant[i] = taula[i].Cantidad
-	}
+	fmt.Println("Valores de la BD cargados")
+	/*
+		c.Data["tipos"] = mapiTipo
+		c.Data["cant"] = mapiCant
+		c.Data["dur"] = mapiDur*/
 
-	fmt.Println("he salido")
-	c.Data["tipos"] = mapiTipo
-	c.Data["cant"] = mapiCant
-	c.Data["dur"] = mapiDur
-	fmt.Println("aqui tambn")
+	c.Data["taula"] = &taula
+	fmt.Println("Enviados al html")
 
-	c.TplName = "index.tpl"
+	c.TplName = "indexx.tpl"
 
 }
