@@ -28,14 +28,18 @@
     <td>{{$val.Tipo}}</td>
     <td>{{$val.Cantidad}}</td>
     <td>{{$val.Duracion}}</td>
-    <td><input type="button" onclick="" value="Editar"></td>
+    <td><input type="button" onclick="editar({{$val.ID}})" value="Editar"></td>
     <td><input type="button" onclick="fuera({{$val.ID}})" value="Eliminar"></td>
    </tr>
     {{end}}
 </table>
     </p>
 
-
+    <script>
+    function editar(s) {
+      location.href= "/edit?key=" + s;
+    }
+    </script>
     <script>
     function fuera(s) {
       var r = confirm("¿Estas seguro?");
