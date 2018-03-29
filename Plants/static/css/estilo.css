@@ -15,6 +15,12 @@ body {
       font-weight: normal;
       text-shadow: 0px 1px 2px #ddd;
     }
+
+    .boton{
+      font-size: 20px; 
+      margin-left: 450px;
+    }
+
     body {
       margin: 0px;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -27,13 +33,8 @@ body {
     header,
     footer {
       width: 100px;
-<<<<<<< HEAD
       margin-left: 0px;
       margin-right: 0px;
-=======
-      margin-left: auto;
-      margin-right: auto;
->>>>>>> 2f15133edd2d54dc788416f3c4081d078588f4b0
     } header {
       padding: 0px 0;
     }

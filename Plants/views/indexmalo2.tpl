@@ -15,7 +15,7 @@
 
     <h1 class="logo">Huerto</h1>
      <p>
-    
+     <input type="button" onclick="location.href='/añade';" value="Añadir">
 </header>
      <table>
   <tr>
@@ -28,19 +28,23 @@
     <td>{{$val.Tipo}}</td>
     <td>{{$val.Cantidad}}</td>
     <td>{{$val.Duracion}}</td>
-    <td><input type="button" onclick="" value="Editar"></td>
-    <td><input type="button" onclick="fuera({{$val.ID}})" value="Eliminar"></td>
+    <td><input type="button" onclick="editar({{$val.ID}})" value="Editar"></td>
+    <td><input type="button" onclick="eliminar({{$val.ID}})" value="Eliminar"></td>
    </tr>
     {{end}}
 </table>
     </p>
 
-
     <script>
-    function fuera(s) {
-      var r = confirm("¿Estas seguro?");
+    function editar(s) {
+      location.href= "/edit?key=" + s;
+    }
+    </script>
+    
+    <script>
+    function eliminar(s) {
+      var r = confirm("¿Estas seguro que quieres eliminarlo?");
       if (r == true) {
-          //location.href= '/elim'
           location.href= "/elim?key=" + s;
       } else {
           location.href= "/"
@@ -48,11 +52,6 @@
       //document.getElementById("demo").innerHTML = txt;
     }
     </script> 
-    
-    <br><br>
-    <div align="left">
-     <input type="button" onclick="location.href='/añade';" value="Añadir Planta" class="boton">
-    </div>
    
 </body>
 </html>
