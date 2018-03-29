@@ -17,26 +17,35 @@ func (c *MainController) Get() {
 
 	fmt.Println("entramos default")
 
-	var taula []models.Tabla
-	models.DB.Table("plantas").Select("tipo,cantidad,duracion").Scan(&taula)
+	var taula []models.Plantas
+	models.DB.Table("plantas").Select("id,deleted_at,tipo,cantidad,duracion").Scan(&taula)
+	fmt.Println("tamaño de la tabla: ", len(taula))
 
-	mapiTipo := make(map[int]string)
-	mapiCant := make(map[int]int)
-	mapiDur := make(map[int]int)
+	var taulab []models.Tabla
+	fmt.Println("empezamos bucle")
+	//var taulainsert models.Tabla
+	for i := 0; i < len(taula); i++ {
+		fmt.Println(i, ": Començem")
+		fmt.Println(taula[i].DeletedAt)
+		if taula[i].DeletedAt == nil {
+			fmt.Println("No eliminat, metemos, valor a copiar: ", taula[i])
+			var taulainsert models.Tabla
+			taulainsert.ID = taula[i].ID
+			taulainsert.Tipo = taula[i].Tipo
+			taulainsert.Cantidad = taula[i].Cantidad
+			taulainsert.Duracion = taula[i].Duracion
+			fmt.Println(taulainsert)
+			fmt.Println(taulab)
 
-	for i := 0; i < 3; i++ {
-		fmt.Println("funciono en la iteracion: ", i)
-		mapiTipo[i] = taula[i].Tipo
-		mapiDur[i] = taula[i].Duracion
-		mapiCant[i] = taula[i].Cantidad
+			taulab = append(taulab, taulainsert)
+		}
+		fmt.Println(i, ": saltem")
 	}
 
-	fmt.Println("he salido")
-	c.Data["tipos"] = mapiTipo
-	c.Data["cant"] = mapiCant
-	c.Data["dur"] = mapiDur
-	fmt.Println("aqui tambn")
+	fmt.Println("Valores de la BD cargados")
+	c.Data["taula"] = &taulab
+	fmt.Println("Enviados al html")
 
-	c.TplName = "index.tpl"
+	c.TplName = "indexx.tpl"
 
 }
