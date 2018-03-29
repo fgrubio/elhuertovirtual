@@ -27,8 +27,13 @@ body {
     header,
     footer {
       width: 100px;
+<<<<<<< HEAD
       margin-left: 0px;
       margin-right: 0px;
+=======
+      margin-left: auto;
+      margin-right: auto;
+>>>>>>> 2f15133edd2d54dc788416f3c4081d078588f4b0
     } header {
       padding: 0px 0;
     }
