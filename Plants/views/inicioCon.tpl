@@ -24,8 +24,18 @@
     <br><br>
     <div align="left">
      <input type="button" onclick="location.href='/actual';" value="Seguir con el actual Huerto" class="boton">
-     <input type="button" onclick="location.href='/createtable';" value="Eliminar actual y empezar de nuevo" class="boton">
+     <input type="button" onclick="fuera()" value="Eliminar actual y empezar de nuevo" class="boton">
     </div>
+    <script>
+    function fuera() {
+      var r = confirm("¿Estas seguro que quieres eliminar la actual?");
+      if (r == true) {
+          location.href="/createtable"
+      } else {
+          location.href= "/"
+      }
+    }
+    </script> 
    
 </body>
 </html>
