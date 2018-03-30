@@ -108,8 +108,8 @@ func (c *PlantController) Historial() {
 	var taula []models.Plantas
 	models.DB.Table("plantas").Select("id,created_at,updated_at,deleted_at,tipo,cantidad,duracion").Scan(&taula)
 
-	fmt.Println(taula[1].Cantidad)
-	fmt.Println(taula[1].Duracion)
+	//fmt.Println(taula[1].Cantidad)
+	//fmt.Println(taula[1].Duracion)
 
 	c.Data["taula"] = &taula
 	fmt.Println("Enviados al html")

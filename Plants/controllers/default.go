@@ -49,3 +49,25 @@ func (c *MainController) Get() {
 	c.TplName = "index.tpl"
 
 }
+func (c *MainController) Ini() {
+	//c.Data["Website"] = "beego.me"
+	//c.Data["Email"] = "astaxie@gmail.com"
+
+	fmt.Println("entramos en el Inicio")
+	if models.DB.HasTable("plantas") {
+		fmt.Println("Se ha detectado tabla existente")
+		c.TplName = "inicioCon.tpl"
+	} else {
+		c.TplName = "inicioSin.tpl"
+	}
+}
+func (c *MainController) CreateTable() {
+	if models.DB.HasTable("plantas") {
+		fmt.Println("Eliminamos existente")
+		models.DB.DropTable("plantas")
+	}
+	fmt.Println("CreamosTabla")
+	var plantanueva models.Plantas
+	models.DB.CreateTable(&plantanueva)
+	c.Redirect("/actual", 302)
+}
