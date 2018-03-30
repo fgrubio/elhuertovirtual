@@ -68,7 +68,7 @@
     <div align="left">
      <input type="button" onclick="location.href='/añade';" value="Añadir Planta" class="boton">
      <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
-     <input type="button" onclick="eliminartabla()" value="Eliminar tabla actual" class="boton">
+     <input type="button" onclick="eliminartabla()" value="Elimina todo el cultivo actual" class="boton">
     </div>
    
 </body>
