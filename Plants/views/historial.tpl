@@ -2,35 +2,41 @@
 
 <html>
 <head>
-  <title>Login</title>
+  <title>Historial</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <link rel="shortcut icon" href="http://cdn2.melodijolola.com/media/files/styles/nota_imagen/public/field/image/logo2.jpg" 
+  <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web">
-  <link rel = 'stylesheet' href = '/static/css/estilohistorial.css'>
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"> -->
+  <link rel = 'stylesheet' href = '/static/css/es.css'>
    
 </head>
-<body>
-
-  <header>
-
-    <h1 class="logo">Huerto</h1>
-     <p>
-    
+<header>
+  <div class="topnav">
+      <a href="/actual">
+        <img src="https://image.flaticon.com/icons/svg/17/17699.svg" width="40" height="40">
+      </a>
+      <b href="">
+        <img src="https://image.flaticon.com/icons/png/512/15/15739.png" width="40" height="40">
+      </b>
+      <b href="">Mi Huerto</b>
+      <b href="">|</b>
+      <c href="">Historial</c>
+  </div>
 </header>
-    <h2 class="hey">Historial</h2>
-     <table>
-  <tr>
-    <th>Tipo</th>
-    <th>Creación</th>
-    <th>Última actualización</th>
-    <th>Eliminación</th>
-    <th>Cantidad</th>
-    <th>Duración</th>
-  </tr>
+<body>
+  <div class="div1"></div>
+  <table>
+    <tr>
+      <th>Tipo</th>
+      <th>Creación</th>
+      <th>Última actualización</th>
+      <th>Eliminación</th>
+      <th>Cantidad</th>
+      <th>Duración</th>
+    </tr>
   <tr></tr>
    {{range $key, $val := .taula}}
-    <td>{{$val.Tipo}}</td>
+    <td  class="td1">{{$val.Tipo}}</td>
     <td>{{$val.CreatedAt}}</td>
     <td>{{$val.UpdatedAt}}</td>
     <td>{{$val.DeletedAt}}</td>
@@ -38,13 +44,9 @@
     <td>{{$val.Duracion}}</td>
    </tr>
     {{end}}
-</table>
-    </p>
-
-    <br><br>
-    <div align="left">
-     <input type="button" onclick="location.href='/actual';" value="Atras" class="boton">
-    </div>
-   
+</table>   
 </body>
+<footer>
+  <h1>by Felipe and David for Sparsity </h1>
+</footer>
 </html>

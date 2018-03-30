@@ -56,8 +56,15 @@ func (c *PlantController) Crear() {
 	models.DB.Table("plantas").Select("id,tipo,deleted_at").Where("tipo = ?", planta.Tipo).Count(&count).Scan(&plantab)
 	fmt.Println(planta.Tipo, count)
 	if count == 0 {
-		models.Afegir(planta)
-		c.Redirect("/actual", 302)
+		if planta.Cantidad == 0 {
+			fmt.Println("No se ha encontrado pero cantidad 0")
+			fmt.Println("Error de Update")
+			c.Data["planta"] = &planta
+			c.TplName = "error2.tpl"
+		} else {
+			models.Afegir(planta)
+			c.Redirect("/actual", 302)
+		}
 	} else {
 		for i := 0; i < len(plantab) && hayuno == false; i++ {
 			if plantab[i].DeletedAt == nil {
@@ -72,8 +79,15 @@ func (c *PlantController) Crear() {
 		}
 		if hayuno == false {
 			fmt.Println("No se ha encontrado ninguno igual, se añade")
-			models.Afegir(planta)
-			c.Redirect("/actual", 302)
+			if planta.Cantidad == 0 {
+				fmt.Println("No se ha encontrado pero cantidad 0")
+				fmt.Println("Error de Update")
+				c.Data["planta"] = &planta
+				c.TplName = "error2.tpl"
+			} else {
+				models.Afegir(planta)
+				c.Redirect("/actual", 302)
+			}
 		}
 	}
 }
