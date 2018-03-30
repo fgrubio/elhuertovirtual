@@ -54,12 +54,21 @@
       }
       //document.getElementById("demo").innerHTML = txt;
     }
+    function eliminartabla() {
+      var r = confirm("¿Estas seguro que quieres eliminar la actual?");
+      if (r == true) {
+          location.href="/createtable"
+      } else {
+          location.href= "/"
+      }
+    }
     </script> 
     
     <br><br>
     <div align="left">
      <input type="button" onclick="location.href='/añade';" value="Añadir Planta" class="boton">
      <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
+     <input type="button" onclick="eliminartabla()" value="Eliminar tabla actual" class="boton">
     </div>
    
 </body>
