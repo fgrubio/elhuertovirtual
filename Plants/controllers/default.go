@@ -22,7 +22,7 @@ func (c *MainController) Get() {
 	//fmt.Println("tamaño de la tabla: ", len(taula))
 
 	var taulab []models.Tabla
-	fmt.Println("empezamos bucle")
+	//fmt.Println("empezamos bucle")
 	//var taulainsert models.Tabla
 	for i := 0; i < len(taula); i++ {
 		//fmt.Println(i, ": Començem")
