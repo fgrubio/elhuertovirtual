@@ -17,7 +17,7 @@ func (c *PlantController) Elim() {
 	x, _ := c.GetInt("key")
 	fmt.Println("LA X AHORA VALE ESTO: ", x)
 	models.Borrar(x)
-	c.Redirect("/", 302)
+	c.Redirect("/actual", 302)
 }
 
 func (c *PlantController) Edit() {
@@ -57,7 +57,7 @@ func (c *PlantController) Crear() {
 	fmt.Println(planta.Tipo, count)
 	if count == 0 {
 		models.Afegir(planta)
-		c.Redirect("/", 302)
+		c.Redirect("/actual", 302)
 	} else {
 		for i := 0; i < len(plantab) && hayuno == false; i++ {
 			if plantab[i].DeletedAt == nil {
@@ -73,7 +73,7 @@ func (c *PlantController) Crear() {
 		if hayuno == false {
 			fmt.Println("No se ha encontrado ninguno igual, se añade")
 			models.Afegir(planta)
-			c.Redirect("/", 302)
+			c.Redirect("/actual", 302)
 		}
 	}
 }
@@ -90,7 +90,7 @@ func (c *PlantController) Update() {
 	planta.Duracion, _ = c.GetInt("duracion")
 
 	models.Actualitzar(planta)
-	c.Redirect("/", 302)
+	c.Redirect("/actual", 302)
 }
 func (c *PlantController) ErrorUpdate() {
 	fmt.Println("Error de Update")
@@ -102,4 +102,16 @@ func (c *PlantController) ErrorUpdate() {
 	c.Data["planta"] = &taula
 	fmt.Println(taula)
 	c.TplName = "error.tpl"
+}
+func (c *PlantController) Historial() {
+	fmt.Println("Historial")
+	var taula []models.Plantas
+	models.DB.Table("plantas").Select("id,created_at,updated_at,deleted_at,tipo,cantidad,duracion").Scan(&taula)
+
+	fmt.Println(taula[1].Cantidad)
+	fmt.Println(taula[1].Duracion)
+
+	c.Data["taula"] = &taula
+	fmt.Println("Enviados al html")
+	c.TplName = "historial.tpl"
 }

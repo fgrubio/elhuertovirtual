@@ -17,11 +17,14 @@
      <p>
     
 </header>
+<h2 class="hey">Cultivos Actuales</h2>
      <table>
   <tr>
     <th>Tipo</th>
     <th>Cantidad</th>
     <th>Duración</th>
+    <th></th>
+    <th></th>
   </tr>
   <tr></tr>
    {{range $key, $val := .taula}}
@@ -47,7 +50,7 @@
           //location.href= '/elim'
           location.href= "/elim?key=" + s;
       } else {
-          location.href= "/"
+          location.href= "/actual"
       }
       //document.getElementById("demo").innerHTML = txt;
     }
@@ -56,6 +59,7 @@
     <br><br>
     <div align="left">
      <input type="button" onclick="location.href='/añade';" value="Añadir Planta" class="boton">
+     <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
     </div>
    
 </body>

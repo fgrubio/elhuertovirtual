@@ -5,29 +5,24 @@ body {
     .logo{
     
       background-repeat: no-repeat;
-      -webkit-background-size: 100px 100px;
+      -webkit-background-size: 0px 00px;
       background-size: 100px 100px;
       background-position: center center;
       text-align: justify;
       font-size: 42px;
-      margin-left: 250px;
-      padding: 50px 0 70px;
+      margin-left: 10px;
+      padding: 50px 0 50px;
       font-weight: normal;
-      text-shadow: 0px 1px 2px #ddd;
+      text-shadow: 0px 0px 0px #ddd;
     }
-
-    .boton{
-      font-size: 20px; 
-      margin-left: 450px;
-    }
-
     body {
       margin: 0px;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 14px;
       line-height: 20px;
       background-color: #c1ff33;
-      margin-left: 100px;
+      margin-left: 50px;
+      margin-right: 50px;
     }
 
     header,
@@ -48,7 +43,7 @@ body {
 
     .description {
       text-align: center;
-      font-size: 16px;
+      font-size: 20px;
     }
 
     a {
@@ -94,7 +89,7 @@ body {
 
   th, td {
       text-align: left;
-      padding: 8px;
+      padding: 10px;
   }
 
   

@@ -14,7 +14,7 @@
   <input type="button" onclick="editar({{.planta.ID}})" value="Editar el ya existente">
   <input type="button" onclick="eliminar({{.planta.ID}})" value="Eliminar el ya existente">
   <input type="button" onclick="location.href= '/añade'" value="Añadir una nuevo cultivo diferente">
-  <input type="button" onclick="location.href= '/'" value="Cancelar">
+  <input type="button" onclick="location.href= '/actual'" value="Cancelar">
 
   
    <script>

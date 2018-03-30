@@ -23,7 +23,7 @@
   <input type="text" name="fin" value="">
   <br>-->
   <input type="button" onclick="myFunction({{.taula.ID}})" value="Guardar">
-  <input type="button" onclick="location.href='/';" value="Cancelar">
+  <input type="button" onclick="location.href='/actual';" value="Cancelar">
   
     <script>
     function myFunction(s) {
