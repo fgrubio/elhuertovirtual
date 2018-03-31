@@ -32,32 +32,33 @@
     <input type="button" onclick="eliminartabla()" value="Eliminar todo el cultivo actual" class="boton">
     <!-- <input type="button" onclick="location.href='/';" value="Volver al menú principal" class="boton"> -->
   </div>
-  <table>
-    <tr>
-      <th>Tipo</th>
-      <th>Cantidad</th>
-      <th>Duración</th>
-      <th></th>
-      <th></th>
-    </tr>
-    <tr></tr>
-    {{range $key, $val := .taula}}
-      <td class="td1">{{$val.Tipo}}</td>
-      <td>{{$val.Cantidad}}</td>
-      <td>{{$val.Duracion}}</td>
-      <td>  
-        <input type="button" onclick="editar({{$val.ID}})" value="Editar" class="boton2">
-      </td>
-      <td>
-        <input type="button" onclick="fuera({{$val.ID}})" value="Eliminar" class="boton2">
-      </td>
-    </tr>
-      {{end}}
-  </table>
+  <div class="divtable">
+    <table>
+      <tr>
+        <th>Tipo</th>
+        <th>Cantidad</th>
+        <th>Duración</th>
+        <th></th>
+        <th></th>
+      </tr>
+      {{range $key, $val := .taula}}
+        <td class="td1">{{$val.Tipo}}</td>
+        <td>{{$val.Cantidad}}</td>
+        <td>{{$val.Duracion}}</td>
+        <td>  
+          <input type="button" onclick="editar({{$val.ID}})" value="Editar" class="boton2">
+        </td>
+        <td>
+          <input type="button" onclick="fuera({{$val.ID}})" value="Eliminar" class="boton2">
+        </td>
+      </tr>
+        {{end}}
+    </table>
+  </div>
+  <footer align="center">
+    <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
+  </footer>
 </body>
-<footer align="center">
-  <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
-</footer>
 
 <script>
   function editar(s) {

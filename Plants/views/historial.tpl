@@ -26,28 +26,29 @@
 </header>
 <body>
   <div class="div1"></div>
-  <table>
-    <tr>
-      <th>Tipo</th>
-      <th>Creación</th>
-      <th>Última actualización</th>
-      <th>Eliminación</th>
-      <th>Cantidad</th>
-      <th>Duración</th>
+  <div class="divtable">
+    <table>
+      <tr>
+        <th>Tipo</th>
+        <th>Creación</th>
+        <th>Última actualización</th>
+        <th>Eliminación</th>
+        <th>Cantidad</th>
+        <th>Duración</th>
+      </tr>
+    {{range $key, $val := .taula}}
+      <td  class="td1">{{$val.Tipo}}</td>
+      <td>{{$val.CreatedAt}}</td>
+      <td>{{$val.UpdatedAt}}</td>
+      <td>{{$val.DeletedAt}}</td>
+      <td>{{$val.Cantidad}}</td>
+      <td>{{$val.Duracion}}</td>
     </tr>
-  <tr></tr>
-   {{range $key, $val := .taula}}
-    <td  class="td1">{{$val.Tipo}}</td>
-    <td>{{$val.CreatedAt}}</td>
-    <td>{{$val.UpdatedAt}}</td>
-    <td>{{$val.DeletedAt}}</td>
-    <td>{{$val.Cantidad}}</td>
-    <td>{{$val.Duracion}}</td>
-   </tr>
-    {{end}}
-</table>   
+      {{end}}
+    </table> 
+  </div>
+  <footer align="center">
+    <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
+  </footer>
 </body>
-<footer align="center">
-  <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
-</footer>
 </html>
