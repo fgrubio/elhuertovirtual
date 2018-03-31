@@ -2,11 +2,12 @@
 
 <html>
 <head>
-  <title>Login</title>
+  <title>MiHuerto</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
-  <link rel = 'stylesheet' href = '/static/css/esInicio.css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
+  <link rel = 'stylesheet' href = '/static/css/esInicio1.css'>
    
 </head>
 
@@ -29,8 +30,8 @@
   <input type="button" onclick="fuera()" value="Eliminar actual y empezar de nuevo" class="boton">
 </div>
 </body>
-<footer>
-  <h1>by Felipe and David for Sparsity </h1>
+<footer align="center">
+  <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
 </footer>
 <script>
 function fuera() {
