@@ -18,7 +18,7 @@ func (c *MainController) Get() {
 	fmt.Println("entramos default")
 
 	var taula []models.Plantas
-	models.DB.Table("plantas").Select("id,deleted_at,tipo,cantidad,duracion").Scan(&taula)
+	models.DB.Table("plantas").Select("id,deleted_at,tipo,cantidad,duracion,seleccio").Scan(&taula)
 	//fmt.Println("tamaño de la tabla: ", len(taula))
 
 	var taulab []models.Tabla
@@ -34,6 +34,7 @@ func (c *MainController) Get() {
 			taulainsert.Tipo = taula[i].Tipo
 			taulainsert.Cantidad = taula[i].Cantidad
 			taulainsert.Duracion = taula[i].Duracion
+			taulainsert.Seleccio = taula[i].Seleccio
 			//fmt.Println(taulainsert)
 			//fmt.Println(taulab)
 

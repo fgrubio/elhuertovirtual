@@ -32,6 +32,12 @@
     <br>
     <h2>Duración de la Plantación:<h2>
     <input class="forminput" type="text" name="Duracion" value="{{.taula.Duracion}}" id="duracion" >
+    <select name="Seleccio" id= "seleccio">
+    <option value="" disabled selected>{{.taula.Seleccio}}</option>
+      <option value="Dias">Dias</option>
+      <option value="Meses">Meses</option>
+      <option value="Años">Años</option>
+    </select>
     <br>
     <br>
     <!--Fecha de incio:<br>
@@ -55,7 +61,8 @@
               location.href= "/update?key="+ {{.taula.ID}} + 
               "&tipo="+ document.getElementById("tipo").value +
               "&cantidad="+ document.getElementById("cantidad").value +
-              "&duracion="+ document.getElementById("duracion").value;
+              "&duracion="+ document.getElementById("duracion").value +
+              "&seleccio="+ document.getElementById("seleccio").value;
           } else {
             location.href= "/edit?key=" + s;
           }        

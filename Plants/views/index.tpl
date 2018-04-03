@@ -37,14 +37,15 @@
       <tr>
         <th>Tipo</th>
         <th>Cantidad</th>
-        <th>Duración(Meses)</th>
+        <th>Duración</th>
         <th></th>
         <th></th>
       </tr>
       {{range $key, $val := .taula}}
         <td class="td1">{{$val.Tipo}}</td>
         <td>{{$val.Cantidad}}</td>
-        <td>{{$val.Duracion}}</td>
+        <td>{{$val.Duracion}} {{$val.Seleccio}}</td>
+
         <td>  
           <input type="button" onclick="editar({{$val.ID}})" value="Editar" class="boton2">
         </td>

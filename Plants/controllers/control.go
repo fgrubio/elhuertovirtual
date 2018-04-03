@@ -26,7 +26,7 @@ func (c *PlantController) Edit() {
 	fmt.Println("Actualizaremos id = ", key)
 
 	var taula models.Plantas
-	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion").Where("id = ?", key).Scan(&taula)
+	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion,seleccio").Where("id = ?", key).Scan(&taula)
 	c.Data["taula"] = &taula
 	fmt.Println(taula)
 	c.TplName = "edit.tpl"
@@ -36,7 +36,7 @@ func (c *PlantController) Añade() {
 	fmt.Println("hola he llegado al añadir")
 	c.TplName = "añadir.tpl"
 	var taula []models.Plantas
-	models.DB.Table("plantas").Select("tipo,cantidad,duracion").Scan(&taula)
+	models.DB.Table("plantas").Select("tipo,cantidad,duracion,seleccio").Scan(&taula)
 
 }
 
@@ -47,6 +47,8 @@ func (c *PlantController) Crear() {
 	planta.Tipo = c.GetString("tipo")
 	planta.Cantidad, _ = c.GetInt("cantidad")
 	planta.Duracion, _ = c.GetInt("duracion")
+	planta.Seleccio = c.GetString("seleccio")
+	fmt.Println("En seleccio esta esto:", planta.Seleccio)
 	//planta.Fecha_ini =
 	//planta.Fecha_fin =
 
@@ -102,6 +104,7 @@ func (c *PlantController) Update() {
 	planta.Tipo = c.GetString("tipo")
 	planta.Cantidad, _ = c.GetInt("cantidad")
 	planta.Duracion, _ = c.GetInt("duracion")
+	planta.Seleccio = c.GetString("life")
 
 	models.Actualitzar(planta)
 	c.Redirect("/actual", 302)
@@ -112,7 +115,7 @@ func (c *PlantController) ErrorUpdate() {
 	fmt.Println("id = ", key)
 
 	var taula models.Plantas
-	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion").Where("id = ?", key).Scan(&taula)
+	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion,seleccio").Where("id = ?", key).Scan(&taula)
 	c.Data["planta"] = &taula
 	fmt.Println(taula)
 	c.TplName = "error.tpl"
@@ -120,7 +123,7 @@ func (c *PlantController) ErrorUpdate() {
 func (c *PlantController) Historial() {
 	fmt.Println("Historial")
 	var taula []models.Plantas
-	models.DB.Table("plantas").Select("id,created_at,updated_at,deleted_at,tipo,cantidad,duracion").Scan(&taula)
+	models.DB.Table("plantas").Select("id,created_at,updated_at,deleted_at,tipo,cantidad,duracion,seleccio").Scan(&taula)
 
 	//fmt.Println(taula[1].Cantidad)
 	//fmt.Println(taula[1].Duracion)

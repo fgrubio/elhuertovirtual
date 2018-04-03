@@ -11,6 +11,7 @@ type Plantas struct {
 	Tipo     string `gorm:"primary_key"`
 	Cantidad int
 	Duracion int
+	Seleccio string
 	//Fecha_ini int
 	//Fecha_fin int
 }
@@ -21,12 +22,13 @@ type Tabla struct {
 	Tipo     string
 	Cantidad int
 	Duracion int
+	Seleccio string
 }
 
 func Actualitzar(pl Plantas) {
 	fmt.Println("Actualizamos")
 	fmt.Println(pl)
-	DB.Model(&Plantas{}).Where("id = ?", pl.ID).Updates(map[string]interface{}{"tipo": pl.Tipo, "Cantidad": pl.Cantidad, "Duracion": pl.Duracion})
+	DB.Model(&Plantas{}).Where("id = ?", pl.ID).Updates(map[string]interface{}{"tipo": pl.Tipo, "Cantidad": pl.Cantidad, "Duracion": pl.Duracion, "Seleccio": pl.Seleccio})
 }
 
 func Borrar(id int) {

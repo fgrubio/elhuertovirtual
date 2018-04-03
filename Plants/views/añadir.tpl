@@ -32,6 +32,13 @@
     <br>
     <h2> Duración de la Plantación:<h2>
     <input class="forminput" type="text" name="Duracion" value="" id="duracion">
+    
+    <select name="Seleccio" id= "seleccio">
+    <option value="" disabled selected>Seleccione la unidad de tiempo...</option>
+      <option value="Dias">Dias</option>
+      <option value="Meses">Meses</option>
+      <option value="Años">Años</option>
+    </select>
     <br>
     <br>
     <!--Fecha de incio:<br>
@@ -53,7 +60,8 @@
       if (r == true) {
           location.href= "/crear?tipo="+ document.getElementById("tipo").value + 
         "&cantidad="+ document.getElementById("cantidad").value +
-        "&duracion="+ document.getElementById("duracion").value;
+        "&duracion="+ document.getElementById("duracion").value +
+        "&seleccio="+ document.getElementById("seleccio").value;
       } else {
           location.href= "/actual"
       }       
