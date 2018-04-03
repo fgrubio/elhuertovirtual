@@ -104,7 +104,7 @@ func (c *PlantController) Update() {
 	planta.Tipo = c.GetString("tipo")
 	planta.Cantidad, _ = c.GetInt("cantidad")
 	planta.Duracion, _ = c.GetInt("duracion")
-	planta.Seleccio = c.GetString("life")
+	planta.Seleccio = c.GetString("seleccio")
 
 	if planta.Cantidad == 0 {
 		fmt.Println("Cantidad 0")
