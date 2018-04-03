@@ -20,6 +20,7 @@ func (c *PlantController) Elim() {
 	models.Borrar(x)
 	flash.Notice("Se ha eliminado correctamente!")
 	flash.Store(&c.Controller)
+
 	c.Redirect("/actual", 302)
 }
 func (c *PlantController) Elim2() {

@@ -52,6 +52,7 @@
         <td>
           <input type="button" onclick="fuera({{$val.ID}})" value="Eliminar" class="boton2">
         </td>
+
       </tr>
         {{end}}
     </table>
@@ -65,12 +66,12 @@
   function editar(s) {
     location.href= "/edit?key=" + s;
   }
-  function fuera(s,h) {
+  function fuera(s) {
     var r = confirm("¿Estas seguro?");
     if (r == true) {
         //location.href= '/elim'
         location.href= "/elim?key=" + s;
-        System.out.println(h);
+        
     } else {
         location.href= "/actual"
     }
