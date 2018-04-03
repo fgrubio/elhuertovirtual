@@ -33,7 +33,7 @@
     <h2> Duración de la Plantación:<h2>
     <input class="forminput" type="text" name="Duracion" value="" id="duracion">
     
-    <select name="Seleccio" id= "seleccio">
+    <select class="select1" name="Seleccio" id= "seleccio">
     <option value="" disabled selected>Seleccione la unidad de tiempo...</option>
       <option value="Dias">Dias</option>
       <option value="Meses">Meses</option>

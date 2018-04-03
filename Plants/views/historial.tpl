@@ -42,7 +42,7 @@
       <td>{{$val.UpdatedAt}}</td>
       <td>{{$val.DeletedAt}}</td>
       <td>{{$val.Cantidad}}</td>
-      <td>{{$val.Duracion}}</td>
+      <td>{{$val.Duracion}} {{$val.Seleccio}}</td>
     </tr>
       {{end}}
     </table> 
