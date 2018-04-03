@@ -103,8 +103,15 @@ func (c *PlantController) Update() {
 	planta.Cantidad, _ = c.GetInt("cantidad")
 	planta.Duracion, _ = c.GetInt("duracion")
 
-	models.Actualitzar(planta)
-	c.Redirect("/actual", 302)
+	if planta.Cantidad == 0 {
+		fmt.Println("Cantidad 0")
+		fmt.Println("Error de Update")
+		c.Data["planta"] = &planta
+		c.TplName = "error3.tpl"
+	} else {
+		models.Actualitzar(planta)
+		c.Redirect("/actual", 302)
+	}
 }
 func (c *PlantController) ErrorUpdate() {
 	fmt.Println("Error de Update")

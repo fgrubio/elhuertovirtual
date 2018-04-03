@@ -24,6 +24,9 @@
 <body>
   <div class="div1"></div>
   <form action="/"  target="_blank" method="GET" align="center">
+    <h2>Tipo:<h2>
+    <input class="forminput" type="text" name="Tipo" value="{{.taula.Tipo}}" id="Tipo" >
+    <br>
     <h2>Cantidad:<h2>
     <input class="forminput" type="text" name="Cantidad" value="{{.taula.Cantidad}}" id="cantidad" >
     <br>
