@@ -34,7 +34,7 @@
         <th>Última actualización</th>
         <th>Eliminación</th>
         <th>Cantidad</th>
-        <th>Duración(Meses)</th>
+        <th>Duración</th>
       </tr>
     {{range $key, $val := .taula}}
       <td  class="td1">{{$val.Tipo}}</td>
