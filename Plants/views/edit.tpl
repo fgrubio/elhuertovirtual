@@ -24,8 +24,8 @@
 <body>
   <div class="div1"></div>
   <form action="/"  target="_blank" method="GET" align="center">
-    <h2>Tipo:<h2>
-    <input class="forminput" type="text" name="Tipo" value="{{.taula.Tipo}}" id="Tipo" >
+     <h2>Tipo:<h2>
+    <input class="forminput" type="text" name="Tipo" value="{{.taula.Tipo}}" id ="tipo" >
     <br>
     <h2>Cantidad:<h2>
     <input class="forminput" type="text" name="Cantidad" value="{{.taula.Cantidad}}" id="cantidad" >
@@ -53,7 +53,7 @@
           if (r == true) {
             //location.href = "/"
               location.href= "/update?key="+ {{.taula.ID}} + 
-              "&tipo="+ {{.taula.Tipo}} +
+              "&tipo="+ document.getElementById("tipo").value +
               "&cantidad="+ document.getElementById("cantidad").value +
               "&duracion="+ document.getElementById("duracion").value;
           } else {
