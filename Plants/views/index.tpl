@@ -79,7 +79,7 @@
     if (r == true) {
         location.href="/createtable"
     } else {
-        location.href= "/"
+        location.href= "/actual"
     }
   }
 </script> 
