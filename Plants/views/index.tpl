@@ -30,6 +30,7 @@
     <input type="button" onclick="location.href='/anade';" value="Añadir Planta" class="boton">
     <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
     <input type="button" onclick="eliminartabla()" value="Eliminar todo el cultivo actual" class="boton">
+    
     <!-- <input type="button" onclick="location.href='/';" value="Volver al menú principal" class="boton"> -->
   </div>
   <div class="divtable">
@@ -45,7 +46,6 @@
         <td class="td1">{{$val.Tipo}}</td>
         <td>{{$val.Cantidad}}</td>
         <td>{{$val.Duracion}} {{$val.Seleccio}}</td>
-
         <td>  
           <input type="button" onclick="editar({{$val.ID}})" value="Editar" class="boton2">
         </td>
@@ -65,11 +65,12 @@
   function editar(s) {
     location.href= "/edit?key=" + s;
   }
-  function fuera(s) {
+  function fuera(s,h) {
     var r = confirm("¿Estas seguro?");
     if (r == true) {
         //location.href= '/elim'
         location.href= "/elim?key=" + s;
+        System.out.println(h);
     } else {
         location.href= "/actual"
     }
