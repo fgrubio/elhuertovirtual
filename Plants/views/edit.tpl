@@ -24,7 +24,7 @@
 <body>
   <div class="div1"></div>
   <form action="/"  target="_blank" method="GET" align="center">
-    <h2>Cantidad:</h2>
+    <h2>Cantidad:<h2>
     <input class="forminput" type="text" name="Cantidad" value="{{.taula.Cantidad}}" id="cantidad" >
     <br>
     <h2>Duración de la Plantación:<h2>
