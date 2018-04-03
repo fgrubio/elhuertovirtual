@@ -29,7 +29,7 @@
   <div align="left">
     <input type="button" onclick="location.href='/anade';" value="Añadir Planta" class="boton">
     <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
-    <input type="button" onclick="eliminartabla()" value="Eliminar todo el cultivo actual" class="boton">
+    <input type="button" onclick="eliminartabla()" value="Vaciar cultivo actual" class="boton">
     <!-- <input type="button" onclick="location.href='/';" value="Volver al menú principal" class="boton"> -->
   </div>
   <div class="divtable">
