@@ -25,16 +25,16 @@
   <div class="div1"></div>
   <form action="/"  target="_blank" method="GET" align="center">
     <h2>Tipo:<h2>
-    <input class="forminput" type="text" name="Tipo" value="" id ="tipo" >
+    <input class="forminput" type="text" name="Tipo" value="{{.taula.Tipo}}" id ="tipo" >
     <br>
     <h2>Cantidad:<h2>
-    <input class="forminput" type="text" name="Cantidad" value="" id="cantidad">
+    <input class="forminput" type="text" name="Cantidad" value="{{.taula.Cantidad}}" id="cantidad">
     <br>
     <h2> Duración de la Plantación:<h2>
-    <input class="forminput" type="text" name="Duracion" value="" id="duracion">
+    <input class="forminput" type="text" name="Duracion" value="{{.taula.Duracion}}" id="duracion">
     
     <select class="select1" name="Seleccio" id= "seleccio">
-    <option value="" disabled selected>Seleccione la unidad de tiempo...</option>
+    <option value="{{.taula.Seleccio}}" disabled selected>Seleccione la unidad de tiempo...</option>
       <option value="Dias">Dias</option>
       <option value="Meses">Meses</option>
       <option value="Años">Años</option>

@@ -28,8 +28,8 @@
   </p>
   <br><br>
   <div align="center">
-    <input type="button" onclick="editar({{.planta.ID}})" value="Editar el ya existente" class="boton">
-    <input type="button" onclick="eliminar({{.planta.ID}})" value="Eliminar el ya existente" class="boton">
+    <input type="button" onclick="editar({{.planta.ID}})" value="Canviarle tipo" class="boton">
+    <input type="button" onclick="eliminar({{.planta.ID}})" value="Eliminar el ya existente y añadir el nuevo" class="boton">
     <input type="button" onclick="location.href= '/anade'" value="Añadir un nuevo cultivo diferente" class="boton">
     <input type="button" onclick="location.href= '/actual'" value="Cancelar" class="boton">
   </div>
@@ -39,15 +39,22 @@
 </footer>
 <script>
   function eliminar(s) {
-    var r = confirm("¿Estas seguro que quieres eliminar la planta existente?");
+    var r = confirm("¿Estas seguro que quieres eliminar la planta existente y añadir el nuevo?");
     if (r == true) {
-        location.href= "/elim?key=" + s;
+        location.href= "/elim2?key=" + s + 
+        "&tipo="+ {{.plantanueva.Tipo}} + 
+        "&cantidad="+ {{.plantanueva.Cantidad}} +
+        "&duracion="+ {{.plantanueva.Duracion}} +
+        "&seleccio="+ {{.plantanueva.Seleccio}};
     } else {
         location.href= "/añade"
     }
   }
   function editar(s) {
-    location.href= "/edit?key=" + s;
+    location.href= "/anade?tipo="+ {{.plantanueva.Tipo}} + 
+    "&cantidad="+ {{.plantanueva.Cantidad}} +
+    "&duracion="+ {{.plantanueva.Duracion}} +
+    "&seleccio="+ {{.plantanueva.Seleccio}};
   }
 </script> 
 </html>
