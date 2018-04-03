@@ -37,7 +37,7 @@
       <tr>
         <th>Tipo</th>
         <th>Cantidad</th>
-        <th>Duración</th>
+        <th>Duración(Meses)</th>
         <th></th>
         <th></th>
       </tr>
