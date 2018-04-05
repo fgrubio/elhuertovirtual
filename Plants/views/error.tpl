@@ -30,7 +30,7 @@
   <div align="center">
     <input type="button" onclick="editar({{.planta.ID}})" value="Canviarle tipo" class="boton">
     <input type="button" onclick="eliminar({{.planta.ID}})" value="Eliminar el ya existente y añadir el nuevo" class="boton">
-    <input type="button" onclick="location.href= '/anade'" value="Añadir un nuevo cultivo diferente" class="boton">
+    <input type="button" onclick="actualizar({{.planta.ID}})" value="Actualizar el ya existente con los valores nuevos" class="boton">
     <input type="button" onclick="location.href= '/actual'" value="Cancelar" class="boton">
   </div>
 </body>
@@ -52,6 +52,13 @@
   }
   function editar(s) {
     location.href= "/anade?tipo="+ {{.plantanueva.Tipo}} + 
+    "&cantidad="+ {{.plantanueva.Cantidad}} +
+    "&duracion="+ {{.plantanueva.Duracion}} +
+    "&seleccio="+ {{.plantanueva.Seleccio}};
+  }
+  function actualizar(s) {
+    location.href= "/update?key="+ {{.planta.ID}} + 
+    "&tipo="+ {{.plantanueva.Tipo}} +
     "&cantidad="+ {{.plantanueva.Cantidad}} +
     "&duracion="+ {{.plantanueva.Duracion}} +
     "&seleccio="+ {{.plantanueva.Seleccio}};

@@ -28,7 +28,7 @@
   </p>
   <br><br>
   <div align="center">
-    <input type="button" onclick="location.href= '/anade'" value="Añadirlo de nuevo con cantidad" class="boton">
+    <input type="button" onclick="editar({{.planta.ID}})" value="Añadirlo de nuevo con cantidad" class="boton">
     <input type="button" onclick="location.href= '/actual'" value="Cancelar" class="boton">
   </div>
 </body>
@@ -41,11 +41,20 @@
     if (r == true) {
         location.href= "/elim?key=" + s;
     } else {
-        location.href= "/añade"
+        location.href= "/anade"
     }
   }
   function editar(s) {
-    location.href= "/edit?key=" + s;
+    location.href= "/anade?tipo="+ {{.planta.Tipo}} + 
+    "&cantidad="+ {{.planta.Cantidad}} +
+    "&duracion="+ {{.planta.Duracion}} +
+    "&seleccio="+ {{.planta.Seleccio}};
+  }
+  function anade(s) {
+    location.href= "/anade?tipo="+ {{.planta.Tipo}} + 
+    "&cantidad="+ {{.planta.Cantidad}} +
+    "&duracion="+ {{.planta.Duracion}} +
+    "&seleccio="+ {{.planta.Seleccio}};
   }
 </script> 
 </html>

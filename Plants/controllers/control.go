@@ -21,62 +21,28 @@ func (c *PlantController) Elim() {
 }
 func (c *PlantController) Elim2() {
 	fmt.Println("He llegado al borrar y añadir")
-	//c.TplName = "eliminar.tpl"
 	x, _ := c.GetInt("key")
+	fmt.Println("Borramos con key = ", x)
 	models.Borrar(x)
-	fmt.Println("Toca crear")
 
 	var planta models.Plantas
 	planta.Tipo = c.GetString("tipo")
 	planta.Cantidad, _ = c.GetInt("cantidad")
 	planta.Duracion, _ = c.GetInt("duracion")
 	planta.Seleccio = c.GetString("seleccio")
-	fmt.Println("En seleccio esta esto:", planta.Seleccio)
 	//planta.Fecha_ini =
 	//planta.Fecha_fin =
+	fmt.Println("añadimos: ", planta)
 
-	var count int
-	var plantab []models.Plantas
-	hayuno := false
-	models.DB.Table("plantas").Select("id,tipo,deleted_at").Where("tipo = ?", planta.Tipo).Count(&count).Scan(&plantab)
-	fmt.Println(planta.Tipo, count)
-	if count == 0 {
-		if planta.Cantidad == 0 {
-			fmt.Println("No se ha encontrado pero cantidad 0")
-			fmt.Println("Error de Update")
-			c.Data["planta"] = &planta
-			c.TplName = "error2.tpl"
-		} else {
-			models.Afegir(planta)
-			c.Redirect("/actual", 302)
-		}
+	if planta.Cantidad == 0 {
+		fmt.Println("No se ha encontrado pero cantidad 0")
+		fmt.Println("Error de Update")
+		c.Data["planta"] = &planta
+		c.TplName = "error2.tpl"
 	} else {
-		for i := 0; i < len(plantab) && hayuno == false; i++ {
-			if plantab[i].DeletedAt == nil {
-				fmt.Println("Se ha encontrado, NO se añade")
-				hayuno = true
-				//c.Redirect("'/erroralanadir?key=' + plantab[i].ID", 302)
-				fmt.Println("Error de Update")
-				fmt.Println("id = ", plantab[i].ID)
-				c.Data["planta"] = &plantab[i]
-				c.Data["plantanueva"] = &planta
-				c.TplName = "error.tpl"
-			}
-		}
-		if hayuno == false {
-			fmt.Println("No se ha encontrado ninguno igual, se añade")
-			if planta.Cantidad == 0 {
-				fmt.Println("No se ha encontrado pero cantidad 0")
-				fmt.Println("Error de Update")
-				c.Data["planta"] = &planta
-				c.TplName = "error2.tpl"
-			} else {
-				models.Afegir(planta)
-				c.Redirect("/actual", 302)
-			}
-		}
+		models.Afegir(planta)
+		c.Redirect("/actual", 302)
 	}
-	c.Redirect("/actual", 302)
 }
 
 func (c *PlantController) Edit() {
@@ -100,10 +66,13 @@ func (c *PlantController) Añade() {
 	planta.Seleccio = c.GetString("seleccio")
 	c.Data["taula"] = &planta
 	fmt.Println(planta)
-	c.TplName = "añadir.tpl"
+	if planta.Seleccio == "" {
+		c.TplName = "añadir.tpl"
+	} else {
+		c.TplName = "añadir2.tpl"
+	}
 	var taula []models.Plantas
 	models.DB.Table("plantas").Select("tipo,cantidad,duracion,seleccio").Scan(&taula)
-
 }
 func (c *PlantController) Crear() {
 	fmt.Println("he llegado al crear")
@@ -175,8 +144,8 @@ func (c *PlantController) Update() {
 	if planta.Cantidad == 0 {
 		fmt.Println("Cantidad 0")
 		fmt.Println("Error de Update")
-		c.Data["planta"] = &planta
-		c.TplName = "error3.tpl"
+		c.Data["taula"] = &planta
+		c.TplName = "error4.tpl"
 	} else {
 		models.Actualitzar(planta)
 		c.Redirect("/actual", 302)
