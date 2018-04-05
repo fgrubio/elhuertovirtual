@@ -56,7 +56,16 @@ func (c *PlantController) Edit() {
 
 	var taula models.Plantas
 	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion,seleccio").Where("id = ?", key).Scan(&taula)
-	c.Data["taula"] = &taula
+	var planta models.Plantas
+	planta.Tipo = c.GetString("tipo")
+	planta.Cantidad, _ = c.GetInt("cantidad")
+	planta.Duracion, _ = c.GetInt("duracion")
+	planta.Seleccio = c.GetString("seleccio")
+	if planta.Tipo == "" {
+		c.Data["taula"] = &taula
+	} else {
+		c.Data["taula"] = &planta
+	}
 	fmt.Println(taula)
 	c.TplName = "edit.tpl"
 }
