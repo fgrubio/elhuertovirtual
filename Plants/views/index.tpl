@@ -45,13 +45,13 @@
         <td class="td1">{{$val.Tipo}}</td>
         <td>{{$val.Cantidad}}</td>
         <td>{{$val.Duracion}} {{$val.Seleccio}}</td>
-
         <td>  
           <input type="button" onclick="editar({{$val.ID}})" value="Editar" class="boton2">
         </td>
         <td>
           <input type="button" onclick="fuera({{$val.ID}})" value="Eliminar" class="boton2">
         </td>
+
       </tr>
         {{end}}
     </table>
@@ -70,6 +70,7 @@
     if (r == true) {
         //location.href= '/elim'
         location.href= "/elim?key=" + s;
+        
     } else {
         location.href= "/actual"
     }
