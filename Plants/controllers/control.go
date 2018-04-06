@@ -3,6 +3,7 @@ package controllers
 import (
 	"elhuertovirtual/Plants/models"
 	"fmt"
+	"strconv"
 
 	"github.com/astaxie/beego"
 )
@@ -54,38 +55,83 @@ func (c *PlantController) Edit() {
 	key, _ := c.GetInt("key")
 	fmt.Println("Actualizaremos id = ", key)
 
-	var taula models.Plantas
-	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion,seleccio").Where("id = ?", key).Scan(&taula)
-	var planta models.Plantas
-	planta.Tipo = c.GetString("tipo")
-	planta.Cantidad, _ = c.GetInt("cantidad")
-	planta.Duracion, _ = c.GetInt("duracion")
-	planta.Seleccio = c.GetString("seleccio")
-	if planta.Tipo == "" {
-		c.Data["taula"] = &taula
-	} else {
-		c.Data["taula"] = &planta
-	}
-	fmt.Println(taula)
-	c.TplName = "edit.tpl"
-}
+	flash := beego.ReadFromRequest(&c.Controller)
+	if _, ok := flash.Data["notice"]; ok {
+		// Display settings successful
+		//c.TplNames = "set_success.html"
+		fmt.Println("Aqui 111, ok = ", ok)
+		c.TplName = "edit.tpl"
+	} else if man, ok := flash.Data["error"]; ok {
+		// Display error messages
+		//c.TplNames = "set_error.html"
+		fmt.Println("Error, ok =", ok)
 
+		fmt.Println("FLASH = ", man, flash.Data, flash.Data["ID"], flash.Data["Tipo"], flash.Data["Cantidad"], flash.Data["Duracion"], flash.Data["Seleccion"])
+		var planta models.Plantas
+		ID, _ := strconv.ParseUint(flash.Data["ID]"], 10, 32)
+		planta.ID = uint(ID)
+		Tipo, _ := flash.Data["Tipo"]
+		planta.Tipo = Tipo
+		planta.Cantidad, _ = strconv.Atoi(flash.Data["Cantidad"])
+		planta.Duracion, _ = strconv.Atoi(flash.Data["Duracion"])
+		planta.Seleccio, _ = flash.Data["Seleccion"]
+		c.Data["taula"] = &planta
+		c.TplName = "edit2.tpl"
+	} else {
+		//CODI VELL
+		fmt.Println("Via normal")
+		var taula models.Plantas
+		models.DB.Table("plantas").Select("id,tipo,cantidad,duracion,seleccio").Where("id = ?", key).Scan(&taula)
+		var planta models.Plantas
+		planta.Tipo = c.GetString("tipo")
+		planta.Cantidad, _ = c.GetInt("cantidad")
+		planta.Duracion, _ = c.GetInt("duracion")
+		planta.Seleccio = c.GetString("seleccio")
+		if planta.Tipo == "" {
+			c.Data["taula"] = &taula
+		} else {
+			c.Data["taula"] = &planta
+		}
+		fmt.Println(taula)
+		c.TplName = "edit.tpl"
+	}
+}
 func (c *PlantController) Añade() {
 	fmt.Println("hola he llegado al añadir")
-	var planta models.Plantas
-	planta.Tipo = c.GetString("tipo")
-	planta.Cantidad, _ = c.GetInt("cantidad")
-	planta.Duracion, _ = c.GetInt("duracion")
-	planta.Seleccio = c.GetString("seleccio")
-	c.Data["taula"] = &planta
-	fmt.Println(planta)
-	if planta.Seleccio == "" {
-		c.TplName = "añadir.tpl"
+	flash := beego.ReadFromRequest(&c.Controller)
+	if _, ok := flash.Data["notice"]; ok {
+		fmt.Println("Aqui 111, ok = ", ok)
+		c.TplName = "edit.tpl"
+	} else if man, ok := flash.Data["error"]; ok {
+		fmt.Println("Error, ok =", ok)
+
+		fmt.Println("FLASH = ", man, flash.Data, flash.Data["ID"], flash.Data["Tipo"], flash.Data["Cantidad"], flash.Data["Duracion"], flash.Data["Seleccion"])
+		var planta models.Plantas
+		ID, _ := strconv.ParseUint(flash.Data["ID]"], 10, 32)
+		planta.ID = uint(ID)
+		Tipo, _ := flash.Data["Tipo"]
+		planta.Tipo = Tipo
+		planta.Cantidad, _ = strconv.Atoi(flash.Data["Cantidad"])
+		planta.Duracion, _ = strconv.Atoi(flash.Data["Duracion"])
+		planta.Seleccio, _ = flash.Data["Seleccion"]
+		c.Data["taula"] = &planta
+		c.TplName = "añadir3.tpl"
 	} else {
-		c.TplName = "añadir2.tpl"
+		var planta models.Plantas
+		planta.Tipo = c.GetString("tipo")
+		planta.Cantidad, _ = c.GetInt("cantidad")
+		planta.Duracion, _ = c.GetInt("duracion")
+		planta.Seleccio = c.GetString("seleccio")
+		c.Data["taula"] = &planta
+		fmt.Println(planta)
+		if planta.Seleccio == "" {
+			c.TplName = "añadir.tpl"
+		} else {
+			c.TplName = "añadir2.tpl"
+		}
+		var taula []models.Plantas
+		models.DB.Table("plantas").Select("tipo,cantidad,duracion,seleccio").Scan(&taula)
 	}
-	var taula []models.Plantas
-	models.DB.Table("plantas").Select("tipo,cantidad,duracion,seleccio").Scan(&taula)
 }
 func (c *PlantController) Crear() {
 	fmt.Println("he llegado al crear")
@@ -98,43 +144,45 @@ func (c *PlantController) Crear() {
 	fmt.Println("En seleccio esta esto:", planta.Seleccio)
 	//planta.Fecha_ini =
 	//planta.Fecha_fin =
-
-	var count int
-	var plantab []models.Plantas
-	hayuno := false
-	models.DB.Table("plantas").Select("id,tipo,deleted_at").Where("tipo = ?", planta.Tipo).Count(&count).Scan(&plantab)
-	fmt.Println(planta.Tipo, count)
-	if count == 0 {
-		if planta.Cantidad == 0 {
-			fmt.Println("No se ha encontrado pero cantidad 0")
-			fmt.Println("Error de Update")
-			c.Data["planta"] = &planta
-			c.TplName = "error2.tpl"
-		} else {
+	if planta.Cantidad == 0 {
+		fmt.Println("No se ha encontrado pero cantidad 0")
+		fmt.Println("Error de Update")
+		//c.Data["planta"] = &planta
+		//c.TplName = "error2.tpl"
+		flash := beego.NewFlash()
+		fmt.Println("ERROR: Cantidad = 0")
+		flash.Error("Mejor que pongas algo de cantidad ;)")
+		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
+		flash.Data["Tipo"] = planta.Tipo
+		flash.Data["Cantidad"] = strconv.Itoa(planta.Cantidad)
+		flash.Data["Duracion"] = strconv.Itoa(planta.Duracion)
+		flash.Data["Seleccion"] = planta.Seleccio
+		flash.Store(&c.Controller)
+		c.Redirect("/anade", 302)
+		return
+	} else {
+		var count int
+		var plantab []models.Plantas
+		hayuno := false
+		models.DB.Table("plantas").Select("id,tipo,deleted_at").Where("tipo = ?", planta.Tipo).Count(&count).Scan(&plantab)
+		fmt.Println(planta.Tipo, count)
+		if count == 0 {
 			models.Afegir(planta)
 			c.Redirect("/actual", 302)
-		}
-	} else {
-		for i := 0; i < len(plantab) && hayuno == false; i++ {
-			if plantab[i].DeletedAt == nil {
-				fmt.Println("Se ha encontrado, NO se añade")
-				hayuno = true
-				//c.Redirect("'/erroralanadir?key=' + plantab[i].ID", 302)
-				fmt.Println("Error de Update")
-				fmt.Println("id = ", plantab[i].ID)
-				c.Data["planta"] = &plantab[i]
-				c.Data["plantanueva"] = &planta
-				c.TplName = "error.tpl"
+		} else {
+			for i := 0; i < len(plantab) && hayuno == false; i++ {
+				if plantab[i].DeletedAt == nil {
+					fmt.Println("Se ha encontrado, NO se añade")
+					hayuno = true
+					fmt.Println("Error de Update")
+					fmt.Println("id = ", plantab[i].ID)
+					c.Data["planta"] = &plantab[i]
+					c.Data["plantanueva"] = &planta
+					c.TplName = "error.tpl"
+				}
 			}
-		}
-		if hayuno == false {
-			fmt.Println("No se ha encontrado ninguno igual, se añade")
-			if planta.Cantidad == 0 {
-				fmt.Println("No se ha encontrado pero cantidad 0")
-				fmt.Println("Error de Update")
-				c.Data["planta"] = &planta
-				c.TplName = "error2.tpl"
-			} else {
+			if hayuno == false {
+				fmt.Println("No se ha encontrado ninguno igual, se podria añadir")
 				models.Afegir(planta)
 				c.Redirect("/actual", 302)
 			}
@@ -144,7 +192,7 @@ func (c *PlantController) Crear() {
 
 func (c *PlantController) Update() {
 	fmt.Println("he llegado al actualizar")
-
+	flash := beego.NewFlash()
 	var planta models.Plantas
 	var integ int
 	integ, _ = c.GetInt("key")
@@ -153,8 +201,26 @@ func (c *PlantController) Update() {
 	planta.Cantidad, _ = c.GetInt("cantidad")
 	planta.Duracion, _ = c.GetInt("duracion")
 	planta.Seleccio = c.GetString("seleccio")
-
+	//NEWWWWW
 	if planta.Cantidad == 0 {
+		fmt.Println("ERROR: Cantidad = 0")
+		flash.Error("Mejor que pongas algo de cantidad ;)")
+		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
+		flash.Data["Tipo"] = planta.Tipo
+		flash.Data["Cantidad"] = strconv.Itoa(planta.Cantidad)
+		flash.Data["Duracion"] = strconv.Itoa(planta.Duracion)
+		flash.Data["Seleccion"] = planta.Seleccio
+		flash.Store(&c.Controller)
+		c.Redirect("/edit", 302)
+		return
+	} else {
+		models.Actualitzar(planta)
+		flash.Notice("Settings saved!")
+		flash.Store(&c.Controller)
+		c.Redirect("/actual", 302)
+	}
+	//NEWWW
+	/*if planta.Cantidad == 0 {
 		fmt.Println("Cantidad 0")
 		fmt.Println("Error de Update")
 		c.Data["taula"] = &planta
@@ -162,7 +228,7 @@ func (c *PlantController) Update() {
 	} else {
 		models.Actualitzar(planta)
 		c.Redirect("/actual", 302)
-	}
+	}*/
 }
 func (c *PlantController) ErrorUpdate() {
 	fmt.Println("Error de Update")

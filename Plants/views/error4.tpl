@@ -41,7 +41,7 @@
     if (r == true) {
         location.href= "/elim?key=" + s;
     } else {
-        location.href= "/añade"
+        location.href= "/actual"
     }
   }
   function editar(s) {

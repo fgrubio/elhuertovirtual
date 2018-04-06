@@ -6,7 +6,9 @@
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
-  <link rel = 'stylesheet' href = '/static/css/esEdit1.css'>
+  <link rel = 'stylesheet' href = '/static/css/esEdit3.css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <header>
   <div class="topnav">
@@ -18,7 +20,7 @@
       </b>
       <b href="">Mi Huerto</b>
       <c href="">|</c>
-      <c href="">Editando cultivo tipo {{.taula.Tipo}}</c>
+      <c href="">Editando cultivo tipo</c>
   </div>
 </header>
 <body>
@@ -46,7 +48,7 @@
     Fecha de recogida:<br>
     <input type="text" name="fin" value="">
     <br>-->
-    <input type="button" onclick="myFunction({{.taula.ID}})" value="Guardar" class = "boton">
+    <input type="button" onclick="myFunction({{.taula.ID}})" data-target="#myModal" value="Guardar" class = "boton">
     <input type="button" onclick="location.href='/actual';" value="Cancelar" class = "boton">
   </form>
 </body>

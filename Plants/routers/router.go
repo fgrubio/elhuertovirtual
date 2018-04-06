@@ -4,7 +4,10 @@ import (
 	"elhuertovirtual/Plants/controllers"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/session"
 )
+
+var globalSessions *session.Manager
 
 func init() {
 	beego.Router("/actual", &controllers.MainController{})

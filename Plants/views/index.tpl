@@ -21,7 +21,7 @@
       </b>
       <b href="">Mi Huerto</b>
       <c href="">|</c>
-      <c href="">Cultivos Actuales</c>
+      <c href="">Cultivos Actuales {{.flash.error}}{{.flash.warning}}{{.flash.notice}}</c>
   </div>
 </header>
 <body>
