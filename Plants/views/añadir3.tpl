@@ -6,7 +6,7 @@
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
-  <link rel = 'stylesheet' href = '/static/css/esEdit3.css'> 
+  <link rel = 'stylesheet' href = '/static/css/esEdit4.css'> 
 </head>
 <header>
   <div class="topnav">

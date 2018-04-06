@@ -84,6 +84,7 @@ func (c *PlantController) Edit() {
 		planta.Duracion, _ = c.GetInt("duracion")
 		planta.Seleccio = c.GetString("seleccio")
 		if planta.Tipo == "" {
+			fmt.Println("Sin valores")
 			c.Data["taula"] = &taula
 		} else {
 			c.Data["taula"] = &planta
@@ -210,10 +211,37 @@ func (c *PlantController) Update() {
 		c.Redirect("/edit", 302)
 		return
 	} else {
-		models.Actualitzar(planta)
-		flash.Notice("Settings saved!")
-		flash.Store(&c.Controller)
-		c.Redirect("/actual", 302)
+		var count int
+		var plantab []models.Plantas
+		hayuno := false
+		models.DB.Table("plantas").Select("id,tipo,deleted_at").Where("tipo = ?", planta.Tipo).Count(&count).Scan(&plantab)
+		fmt.Println(planta.Tipo, count)
+		if count == 0 {
+			models.Actualitzar(planta)
+			flash.Notice("Settings saved!")
+			flash.Store(&c.Controller)
+			c.Redirect("/actual", 302)
+		} else {
+			for i := 0; i < len(plantab) && hayuno == false; i++ {
+				if plantab[i].DeletedAt == nil && planta.ID != plantab[i].ID {
+					fmt.Println("Se ha encontrado, NO se añade")
+					//if(hayuno) haydos = true;
+					hayuno = true
+					fmt.Println("Error de Update")
+					fmt.Println("id = ", plantab[i].ID)
+					c.Data["planta"] = &plantab[i]
+					c.Data["plantanueva"] = &planta
+					c.TplName = "error5.tpl"
+				}
+			}
+			if hayuno == false {
+				fmt.Println("No se ha encontrado ninguno igual, se podria añadir")
+				models.Actualitzar(planta)
+				flash.Notice("Settings saved!")
+				flash.Store(&c.Controller)
+				c.Redirect("/actual", 302)
+			}
+		}
 	}
 	//NEWWW
 	/*if planta.Cantidad == 0 {
@@ -262,7 +290,7 @@ func (c *PlantController) Random() {
 		}
 	}
 	var planta models.Plantas
-	planta.Tipo = strconv.Itoa(random)
+	planta.Tipo = strconv.Itoa(random) + "Plant"
 	planta.Cantidad = 1
 	planta.Duracion = 2
 	planta.Seleccio = "Dias"

@@ -6,7 +6,7 @@
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
-  <link rel = 'stylesheet' href = '/static/css/esEdit3.css'>
+  <link rel = 'stylesheet' href = '/static/css/esEdit4.css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -20,7 +20,7 @@
       </b>
       <b href="">Mi Huerto</b>
       <c href="">|</c>
-      <c href="">Editando cultivo tipo</c>
+      <c href="">Editando cultivo tipo {{.taula.Tipo}}</c>
   </div>
 </header>
 <body>
