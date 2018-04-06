@@ -7,8 +7,6 @@
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
   <link rel = 'stylesheet' href = '/static/css/esEdit4.css'>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <header>
   <div class="topnav">
@@ -34,7 +32,8 @@
     <div align="center" class="errorFlash">{{.flash.error}}</div>
     <h2>Duración de la Plantación:<h2>
     <input class="forminput" type="text" name="Duracion" value="{{.taula.Duracion}}" id="duracion" >
-    <select name="Seleccio" id= "seleccio">
+
+    <select class="select1" name="Seleccio" id= "seleccio">
     <option value="{{.taula.Seleccio}}" disabled selected>{{.taula.Seleccio}}</option>
       <option value="Dias">Dias</option>
       <option value="Meses">Meses</option>

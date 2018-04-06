@@ -64,13 +64,14 @@ func (c *PlantController) Edit() {
 
 		fmt.Println("FLASH = ", man, flash.Data, flash.Data["ID"], flash.Data["Tipo"], flash.Data["Cantidad"], flash.Data["Duracion"], flash.Data["Seleccion"])
 		var planta models.Plantas
-		ID, _ := strconv.ParseUint(flash.Data["ID]"], 10, 32)
+		ID, _ := strconv.ParseInt(flash.Data["ID"], 10, 64)
 		planta.ID = uint(ID)
 		Tipo, _ := flash.Data["Tipo"]
 		planta.Tipo = Tipo
 		planta.Cantidad, _ = strconv.Atoi(flash.Data["Cantidad"])
 		planta.Duracion, _ = strconv.Atoi(flash.Data["Duracion"])
 		planta.Seleccio, _ = flash.Data["Seleccion"]
+		fmt.Println(planta)
 		c.Data["taula"] = &planta
 		c.TplName = "edit2.tpl"
 	} else {
@@ -96,15 +97,12 @@ func (c *PlantController) Edit() {
 func (c *PlantController) Añade() {
 	fmt.Println("hola he llegado al añadir")
 	flash := beego.ReadFromRequest(&c.Controller)
-	if _, ok := flash.Data["notice"]; ok {
-		fmt.Println("Aqui 111, ok = ", ok)
-		c.TplName = "edit.tpl"
-	} else if man, ok := flash.Data["error"]; ok {
+	if man, ok := flash.Data["error"]; ok {
 		fmt.Println("Error, ok =", ok)
 
 		fmt.Println("FLASH = ", man, flash.Data, flash.Data["ID"], flash.Data["Tipo"], flash.Data["Cantidad"], flash.Data["Duracion"], flash.Data["Seleccion"])
 		var planta models.Plantas
-		ID, _ := strconv.ParseUint(flash.Data["ID]"], 10, 32)
+		ID, _ := strconv.ParseInt(flash.Data["ID"], 10, 32)
 		planta.ID = uint(ID)
 		Tipo, _ := flash.Data["Tipo"]
 		planta.Tipo = Tipo
