@@ -47,6 +47,9 @@ func (c *MainController) Get() {
 	c.Data["taula"] = &taulab
 	fmt.Println("Enviados al html")
 
+	flash := beego.ReadFromRequest(&c.Controller)
+	if _, ok := flash.Data["notice"]; ok {
+	}
 	c.TplName = "index.tpl"
 
 }

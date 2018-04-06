@@ -3,6 +3,13 @@
 <html>
 <head>
   <title>MiHuerto | Actual</title>
+  <script>
+		function mi() {
+      if({{.flash.notice}} != ""){
+			  alert({{.flash.notice}});
+      }
+		}
+		</script>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
@@ -24,7 +31,7 @@
       <c href="">Cultivos Actuales {{.flash.error}}{{.flash.warning}}{{.flash.notice}}</c>
   </div>
 </header>
-<body>
+<body onload="mi();">
   <div class="div1"></div>
   <div align="left">
     <input type="button" onclick="location.href='/anade';" value="Añadir Planta" class="boton">
