@@ -56,12 +56,7 @@ func (c *PlantController) Edit() {
 	fmt.Println("Actualizaremos id = ", key)
 
 	flash := beego.ReadFromRequest(&c.Controller)
-	if _, ok := flash.Data["notice"]; ok {
-		// Display settings successful
-		//c.TplNames = "set_success.html"
-		fmt.Println("Aqui 111, ok = ", ok)
-		c.TplName = "edit.tpl"
-	} else if man, ok := flash.Data["error"]; ok {
+	if man, ok := flash.Data["error"]; ok {
 		// Display error messages
 		//c.TplNames = "set_error.html"
 		fmt.Println("Error, ok =", ok)
