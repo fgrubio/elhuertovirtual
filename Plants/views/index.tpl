@@ -7,7 +7,7 @@
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
-  <link rel = 'stylesheet' href = '/static/css/es1.css'>
+  <link rel = 'stylesheet' href = '/static/css/es2.css'>
    
 </head>
 
@@ -30,6 +30,7 @@
     <input type="button" onclick="location.href='/anade';" value="Añadir Planta" class="boton">
     <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
     <input type="button" onclick="eliminartabla()" value="Vaciar cultivo actual" class="boton">
+    <input type="button" onclick="location.href='/random';" value="Random" class="boton3">
     <!-- <input type="button" onclick="location.href='/';" value="Volver al menú principal" class="boton"> -->
   </div>
   <div class="divtable">

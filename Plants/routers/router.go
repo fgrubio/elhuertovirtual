@@ -21,4 +21,5 @@ func init() {
 	beego.Router("/update", &controllers.PlantController{}, "get:Update")
 	beego.Router("/erroralanadir", &controllers.PlantController{}, "get:ErrorUpdate")
 	beego.Router("/historial", &controllers.PlantController{}, "get:Historial")
+	beego.Router("/random", &controllers.PlantController{}, "get:Random")
 }

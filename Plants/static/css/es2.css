@@ -1,0 +1,180 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+  line-height: 20px;
+  background-color: #c1ff33;
+  line-height: 1.8;
+  height: 100%;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+/* Style the top navigation bar */
+header{
+    position: sticky;
+    top: 0;
+}
+.topnav {
+    overflow: hidden;
+    background-color: rgb(52, 122, 55);
+    color: white;
+    height: 70px;
+}
+/* Style the topnav links */
+.topnav a {
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    height: 70px;
+}
+.topnav b {
+    font-family: 'Montserrat', sans-serif; 
+    height: 70px;
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: normal;
+}
+.topnav c {
+    height: 70px;
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: normal;
+}
+/* Change color on hover */
+.topnav a:hover {
+    background-color: #c1ff33;
+    color: rgb(52, 122, 55);
+}
+
+/* Style the content */
+.content {
+    background-color: #ddd;
+    padding: 10px;
+}
+/* Style the footer */
+footer {
+    background-color: rgb(52, 122, 55);
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 35px;
+}
+h1 {
+    font-weight: normal;
+    font-size: 10px;
+    text-align: center;
+}
+.div1 {
+    width: 100%;
+    height: 35px;
+}
+/* MINEEE */
+.divtable {
+    border-collapse: collapse;
+    width: 100%;
+    height: 800px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    height: auto;
+    top: 0;
+}
+th, td {
+    text-align: left;
+    padding: 10px;
+    height: 20px;
+}
+td{
+    top: 0;
+}
+.td1{
+    font-weight: 900;
+    text-transform: uppercase;
+}
+th {
+    background-color: #4caf50;
+    color: white;
+    border-bottom: 3px solid white;
+    font-size: 15px;
+}
+tr:nth-child(even){
+    background-color: #00000015;
+}
+tr:hover {
+    background-color:#0000003a;
+}
+.boton{
+    overflow:hidden;
+    background-color: #4CAF50;
+    border: none;
+    color: black;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.5s;
+    font-size: 14px;
+}
+.boton:hover {
+    background: rgba(0,0,0,0);
+    color: #4CAF50;
+    box-shadow: inset 0 0 0 3px #4CAF50;
+}
+.boton2{
+    overflow:hidden;
+    background-color: rgba(1, 15, 2, 0);
+    /*background-image: url('https://image.flaticon.com/icons/png/512/15/15739.png');*/
+    border: none;
+    padding: auto;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-size: 14px;
+}
+.boton2:hover {
+    color: white;
+}
+.boton3{
+    overflow:hidden;
+    background-color: rgba(76, 175, 79, 0);
+    border: none;
+    color: rgba(76, 175, 79, 0);
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.5s;
+    font-size: 14px;
+}

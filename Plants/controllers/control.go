@@ -3,6 +3,7 @@ package controllers
 import (
 	"elhuertovirtual/Plants/models"
 	"fmt"
+	"math/rand"
 	"strconv"
 
 	"github.com/astaxie/beego"
@@ -247,4 +248,27 @@ func (c *PlantController) Historial() {
 	c.Data["taula"] = &taula
 	fmt.Println("Enviados al html")
 	c.TplName = "historial.tpl"
+}
+func (c *PlantController) Random() {
+	fmt.Println("Entramos en Random")
+	var random int
+	for igual := true; igual; {
+		random = rand.Int()
+		random %= 200
+		var count int
+		models.DB.Table("plantas").Select("tipo").Where("tipo = ?", random).Count(&count)
+		if count == 0 {
+			igual = false
+		}
+	}
+	var planta models.Plantas
+	planta.Tipo = strconv.Itoa(random)
+	planta.Cantidad = 1
+	planta.Duracion = 2
+	planta.Seleccio = "Dias"
+	fmt.Println("Se añade la planta:", planta)
+	//planta.Fecha_ini =
+	//planta.Fecha_fin =
+	models.Afegir(planta)
+	c.Redirect("/actual", 302)
 }

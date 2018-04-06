@@ -163,3 +163,18 @@ tr:hover {
 .boton2:hover {
     color: white;
 }
+.boton3{
+    overflow:hidden;
+    background-color: #4CAF50;
+    border: none;
+    color: black;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.5s;
+    font-size: 14px;
+}
