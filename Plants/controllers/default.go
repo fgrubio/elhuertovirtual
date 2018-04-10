@@ -80,6 +80,10 @@ func (c *MainController) CreateTable() {
 	}
 	fmt.Println("CreamosTabla")
 	var plantanueva models.Plantas
+
+	flash := beego.NewFlash()
+	flash.Notice("Creada Correctamente!")
+	flash.Store(&c.Controller)
 	models.DB.CreateTable(&plantanueva)
 	c.Redirect("/actual", 302)
 }

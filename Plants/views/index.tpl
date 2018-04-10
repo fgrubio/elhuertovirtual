@@ -3,9 +3,7 @@
 <html>
 <head>
   <title>MiHuerto | Actual</title>
-  <script>
-	
-		</script>
+  <script></script>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />

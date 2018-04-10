@@ -141,12 +141,34 @@ func (c *PlantController) Crear() {
 	fmt.Println("En seleccio esta esto:", planta.Seleccio)
 	//planta.Fecha_ini =
 	//planta.Fecha_fin =
-	if planta.Cantidad == 0 {
+	flash := beego.NewFlash()
+	if planta.Tipo == "" && planta.Cantidad == 0 {
+		fmt.Println("ERROR: Tipo = 0 y Cantidad 0")
+		flash.Error("Mejor que pongas algun tipo y cantidad ;)")
+		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
+		flash.Data["Tipo"] = planta.Tipo
+		flash.Data["Cantidad"] = strconv.Itoa(planta.Cantidad)
+		flash.Data["Duracion"] = strconv.Itoa(planta.Duracion)
+		flash.Data["Seleccion"] = planta.Seleccio
+		flash.Store(&c.Controller)
+		c.Redirect("/edit", 302)
+		return
+	} else if planta.Tipo == "" {
+		fmt.Println("ERROR: Tipo = 0")
+		flash.Error("Mejor que pongas algun tipo ;)")
+		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
+		flash.Data["Tipo"] = planta.Tipo
+		flash.Data["Cantidad"] = strconv.Itoa(planta.Cantidad)
+		flash.Data["Duracion"] = strconv.Itoa(planta.Duracion)
+		flash.Data["Seleccion"] = planta.Seleccio
+		flash.Store(&c.Controller)
+		c.Redirect("/edit", 302)
+		return
+	} else if planta.Cantidad == 0 {
 		fmt.Println("No se ha encontrado pero cantidad 0")
 		fmt.Println("Error de Update")
 		//c.Data["planta"] = &planta
 		//c.TplName = "error2.tpl"
-		flash := beego.NewFlash()
 		fmt.Println("ERROR: Cantidad = 0")
 		flash.Error("Mejor que pongas algo de cantidad ;)")
 		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
@@ -164,6 +186,9 @@ func (c *PlantController) Crear() {
 		models.DB.Table("plantas").Select("id,tipo,deleted_at").Where("tipo = ?", planta.Tipo).Count(&count).Scan(&plantab)
 		fmt.Println(planta.Tipo, count)
 		if count == 0 {
+			fmt.Println("No se ha encontrado ninguno igual, se podria añadir")
+			flash.Notice("Todo Salvado!")
+			flash.Store(&c.Controller)
 			models.Afegir(planta)
 			c.Redirect("/actual", 302)
 		} else {
@@ -180,6 +205,8 @@ func (c *PlantController) Crear() {
 			}
 			if hayuno == false {
 				fmt.Println("No se ha encontrado ninguno igual, se podria añadir")
+				flash.Notice("Todo Salvado!")
+				flash.Store(&c.Controller)
 				models.Afegir(planta)
 				c.Redirect("/actual", 302)
 			}
@@ -199,7 +226,29 @@ func (c *PlantController) Update() {
 	planta.Duracion, _ = c.GetInt("duracion")
 	planta.Seleccio = c.GetString("seleccio")
 	//NEWWWWW
-	if planta.Cantidad == 0 {
+	if planta.Tipo == "" && planta.Cantidad == 0 {
+		fmt.Println("ERROR: Tipo = 0 y Cantidad 0")
+		flash.Error("Mejor que pongas algun tipo y cantidad ;)")
+		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
+		flash.Data["Tipo"] = planta.Tipo
+		flash.Data["Cantidad"] = strconv.Itoa(planta.Cantidad)
+		flash.Data["Duracion"] = strconv.Itoa(planta.Duracion)
+		flash.Data["Seleccion"] = planta.Seleccio
+		flash.Store(&c.Controller)
+		c.Redirect("/edit", 302)
+		return
+	} else if planta.Tipo == "" {
+		fmt.Println("ERROR: Tipo = 0")
+		flash.Error("Mejor que pongas algun tipo ;)")
+		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
+		flash.Data["Tipo"] = planta.Tipo
+		flash.Data["Cantidad"] = strconv.Itoa(planta.Cantidad)
+		flash.Data["Duracion"] = strconv.Itoa(planta.Duracion)
+		flash.Data["Seleccion"] = planta.Seleccio
+		flash.Store(&c.Controller)
+		c.Redirect("/edit", 302)
+		return
+	} else if planta.Cantidad == 0 {
 		fmt.Println("ERROR: Cantidad = 0")
 		flash.Error("Mejor que pongas algo de cantidad ;)")
 		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
@@ -218,7 +267,7 @@ func (c *PlantController) Update() {
 		fmt.Println(planta.Tipo, count)
 		if count == 0 {
 			models.Actualitzar(planta)
-			flash.Notice("Settings saved!")
+			flash.Notice("Todo Salvado!")
 			flash.Store(&c.Controller)
 			c.Redirect("/actual", 302)
 		} else {
@@ -237,7 +286,7 @@ func (c *PlantController) Update() {
 			if hayuno == false {
 				fmt.Println("No se ha encontrado ninguno igual, se podria añadir")
 				models.Actualitzar(planta)
-				flash.Notice("Settings saved!")
+				flash.Notice("Todo Salvado!")
 				flash.Store(&c.Controller)
 				c.Redirect("/actual", 302)
 			}
