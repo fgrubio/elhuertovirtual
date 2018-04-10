@@ -6,7 +6,7 @@
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
-  <link rel = 'stylesheet' href = '/static/css/esEdit1.css'>
+  <link rel = 'stylesheet' href = '/static/css/esEdit4.css'>
 </head>
 <header>
   <div class="topnav">
@@ -32,7 +32,8 @@
     <br>
     <h2>Duración de la Plantación:<h2>
     <input class="forminput" type="text" name="Duracion" value="{{.taula.Duracion}}" id="duracion" >
-    <select name="Seleccio" id= "seleccio">
+
+    <select class="select1" name="Seleccio" id= "seleccio">
     <option value="{{.taula.Seleccio}}" disabled selected>{{.taula.Seleccio}}</option>
       <option value="Dias">Dias</option>
       <option value="Meses">Meses</option>
@@ -46,7 +47,7 @@
     Fecha de recogida:<br>
     <input type="text" name="fin" value="">
     <br>-->
-    <input type="button" onclick="myFunction({{.taula.ID}})" value="Guardar" class = "boton">
+    <input type="button" onclick="myFunction({{.taula.ID}})" data-target="#myModal" value="Guardar" class = "boton">
     <input type="button" onclick="location.href='/actual';" value="Cancelar" class = "boton">
   </form>
 </body>

@@ -47,7 +47,7 @@
         "&duracion="+ {{.plantanueva.Duracion}} +
         "&seleccio="+ {{.plantanueva.Seleccio}};
     } else {
-        location.href= "/añade"
+        location.href= "/actual"
     }
   }
   function editar(s) {

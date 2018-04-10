@@ -3,11 +3,18 @@
 <html>
 <head>
   <title>MiHuerto | Actual</title>
+  <script>
+		function mi() {
+      if({{.flash.notice}} != ""){
+			  alert({{.flash.notice}});
+      }
+		}
+		</script>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
-  <link rel = 'stylesheet' href = '/static/css/es1.css'>
+  <link rel = 'stylesheet' href = '/static/css/es2.css'>
    
 </head>
 
@@ -21,17 +28,25 @@
       </b>
       <b href="">Mi Huerto</b>
       <c href="">|</c>
+<<<<<<< HEAD
       <c href="">Cultivos Actuales</c>
       <c href="">{{.flash.notice}}</c>
+=======
+      <c href="">Cultivos Actuales {{.flash.error}}{{.flash.warning}}{{.flash.notice}}</c>
+>>>>>>> a6c2daece1f0cd6c59bd24b21c3b6ac8f5849e56
   </div>
 </header>
-<body>
+<body onload="mi();">
   <div class="div1"></div>
   <div align="left">
     <input type="button" onclick="location.href='/anade';" value="Añadir Planta" class="boton">
     <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
     <input type="button" onclick="eliminartabla()" value="Vaciar cultivo actual" class="boton">
+<<<<<<< HEAD
     <input type="button" onclick="location.href='/random';" value="+" class="boton">
+=======
+    <input type="button" onclick="location.href='/random';" value="Random" class="boton3">
+>>>>>>> a6c2daece1f0cd6c59bd24b21c3b6ac8f5849e56
     <!-- <input type="button" onclick="location.href='/';" value="Volver al menú principal" class="boton"> -->
   </div>
 

@@ -49,6 +49,7 @@ func (c *MainController) Get() {
 
 	flash := beego.ReadFromRequest(&c.Controller)
 	if _, ok := flash.Data["notice"]; ok {
+<<<<<<< HEAD
 		// Display settings successful
 		//c.Redirect("/actual", 302)
 		c.TplName = "index.tpl"
@@ -58,6 +59,9 @@ func (c *MainController) Get() {
 		c.TplName = "error_elim.tpl"
 	}
 
+=======
+	}
+>>>>>>> a6c2daece1f0cd6c59bd24b21c3b6ac8f5849e56
 	c.TplName = "index.tpl"
 
 }
