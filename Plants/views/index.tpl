@@ -4,11 +4,7 @@
 <head>
   <title>MiHuerto | Actual</title>
   <script>
-		function mi() {
-      if({{.flash.notice}} != ""){
-			  alert({{.flash.notice}});
-      }
-		}
+	
 		</script>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
@@ -28,12 +24,8 @@
       </b>
       <b href="">Mi Huerto</b>
       <c href="">|</c>
-<<<<<<< HEAD
       <c href="">Cultivos Actuales</c>
-      <c href="">{{.flash.notice}}</c>
-=======
-      <c href="">Cultivos Actuales {{.flash.error}}{{.flash.warning}}{{.flash.notice}}</c>
->>>>>>> a6c2daece1f0cd6c59bd24b21c3b6ac8f5849e56
+      <c href=""></c>
   </div>
 </header>
 <body onload="mi();">
@@ -42,12 +34,8 @@
     <input type="button" onclick="location.href='/anade';" value="Añadir Planta" class="boton">
     <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
     <input type="button" onclick="eliminartabla()" value="Vaciar cultivo actual" class="boton">
-<<<<<<< HEAD
-    <input type="button" onclick="location.href='/random';" value="+" class="boton">
-=======
     <input type="button" onclick="location.href='/random';" value="Random" class="boton3">
->>>>>>> a6c2daece1f0cd6c59bd24b21c3b6ac8f5849e56
-    <!-- <input type="button" onclick="location.href='/';" value="Volver al menú principal" class="boton"> -->
+    
   </div>
 
   <div class="divtable">
@@ -74,21 +62,16 @@
         {{end}}
     </table>
   </div>
-
-        <!-- Trigger/Open The Modal -->
-    <!--<button id="myBtn">Open Modal</button>-->
       <!-- The Modal -->
     <div id="myModal" class="modal">
 
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
-        <p>holaaaaaaaaa {{.flash.notice}}</p>
+        <p>{{.flash.error}}{{.flash.warning}}{{.flash.notice}}</p>
       </div>
-
     </div>
 
-     
   <footer align="center">
     <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
   </footer>
@@ -104,13 +87,11 @@
     if (r == true) {
         //location.href= '/elim'
         location.href= "/elim?key=" + s;
-        modal.style.display = "block";
-        
+                
     } else {
         location.href= "/actual"
     }
 
-    
     //document.getElementById("demo").innerHTML = txt;
   }
   function eliminartabla() {
@@ -130,22 +111,6 @@
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks the button, open the modal 
-    
-    /*btn.onclick = function() {
-      
-        var r = confirm("¿Estas seguro?");
-        if (r == true) {
-            //location.href= '/elim'
-            location.href= "/elim?key=" + s;
-            
-            
-            
-        } else {
-            location.href= "/actual"
-        }
-    }*/
-
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
@@ -157,6 +122,12 @@
             modal.style.display = "none";
         }
     }
+
+    function mi() {
+      if({{.flash.notice}} != ""){
+			   modal.style.display = "block";
+      }
+		}
     
 </script> 
 </html>

@@ -277,18 +277,6 @@ func (c *PlantController) Historial() {
 	fmt.Println("Enviados al html")
 	c.TplName = "historial.tpl"
 }
-<<<<<<< HEAD
-
-func (c *PlantController) Random() {
-
-	var planta models.Plantas
-	planta.Tipo = "A"
-	planta.Cantidad = 2
-	planta.Duracion = 3
-	planta.Seleccio = "Meses"
-	c.Data["taula"] = &planta
-	c.Redirect("/crear", 302)
-=======
 func (c *PlantController) Random() {
 	fmt.Println("Entramos en Random")
 	var random int
@@ -311,5 +299,4 @@ func (c *PlantController) Random() {
 	//planta.Fecha_fin =
 	models.Afegir(planta)
 	c.Redirect("/actual", 302)
->>>>>>> a6c2daece1f0cd6c59bd24b21c3b6ac8f5849e56
 }

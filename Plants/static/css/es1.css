@@ -163,9 +163,9 @@ tr:hover {
 .boton2:hover {
     color: white;
 }
-<<<<<<< HEAD
 
 /* The Modal (background) */
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -202,7 +202,8 @@ tr:hover {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-=======
+}
+
 .boton3{
     overflow:hidden;
     background-color: #4CAF50;
@@ -217,5 +218,4 @@ tr:hover {
     border-radius: 4px;
     transition: all 0.5s;
     font-size: 14px;
->>>>>>> a6c2daece1f0cd6c59bd24b21c3b6ac8f5849e56
 }
