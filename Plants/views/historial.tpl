@@ -47,8 +47,10 @@
       {{end}}
     </table> 
   </div>
+
   <footer align="center">
     <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
   </footer>
+
 </body>
 </html>
