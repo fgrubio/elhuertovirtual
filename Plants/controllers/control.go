@@ -14,15 +14,17 @@ type PlantController struct {
 func (c *PlantController) Elim() {
 	fmt.Println("He llegado al borrar")
 	flash := beego.NewFlash()
-	//c.TplName = "eliminar.tpl"
 	x, _ := c.GetInt("key")
 	fmt.Println("LA X AHORA VALE ESTO: ", x)
 	models.Borrar(x)
+
 	flash.Notice("Se ha eliminado correctamente!")
 	flash.Store(&c.Controller)
 
 	c.Redirect("/actual", 302)
+
 }
+
 func (c *PlantController) Elim2() {
 	fmt.Println("He llegado al borrar y añadir")
 	x, _ := c.GetInt("key")
@@ -186,4 +188,15 @@ func (c *PlantController) Historial() {
 	c.Data["taula"] = &taula
 	fmt.Println("Enviados al html")
 	c.TplName = "historial.tpl"
+}
+
+func (c *PlantController) Random() {
+
+	var planta models.Plantas
+	planta.Tipo = "A"
+	planta.Cantidad = 2
+	planta.Duracion = 3
+	planta.Seleccio = "Meses"
+	c.Data["taula"] = &planta
+	c.Redirect("/crear", 302)
 }

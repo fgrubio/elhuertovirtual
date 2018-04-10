@@ -22,6 +22,7 @@
       <b href="">Mi Huerto</b>
       <c href="">|</c>
       <c href="">Cultivos Actuales</c>
+      <c href="">{{.flash.notice}}</c>
   </div>
 </header>
 <body>
@@ -30,8 +31,10 @@
     <input type="button" onclick="location.href='/anade';" value="Añadir Planta" class="boton">
     <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
     <input type="button" onclick="eliminartabla()" value="Vaciar cultivo actual" class="boton">
+    <input type="button" onclick="location.href='/random';" value="+" class="boton">
     <!-- <input type="button" onclick="location.href='/';" value="Volver al menú principal" class="boton"> -->
   </div>
+
   <div class="divtable">
     <table>
       <tr>
@@ -49,16 +52,32 @@
           <input type="button" onclick="editar({{$val.ID}})" value="Editar" class="boton2">
         </td>
         <td>
-          <input type="button" onclick="fuera({{$val.ID}})" value="Eliminar" class="boton2">
+          <input type="button" onclick="fuera({{$val.ID}})" value="Eliminar" class="boton2" id="myBtn">
         </td>
 
       </tr>
         {{end}}
     </table>
   </div>
+
+        <!-- Trigger/Open The Modal -->
+    <!--<button id="myBtn">Open Modal</button>-->
+      <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>holaaaaaaaaa {{.flash.notice}}</p>
+      </div>
+
+    </div>
+
+     
   <footer align="center">
     <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
   </footer>
+
 </body>
 
 <script>
@@ -70,10 +89,13 @@
     if (r == true) {
         //location.href= '/elim'
         location.href= "/elim?key=" + s;
+        modal.style.display = "block";
         
     } else {
         location.href= "/actual"
     }
+
+    
     //document.getElementById("demo").innerHTML = txt;
   }
   function eliminartabla() {
@@ -84,5 +106,42 @@
         location.href= "/actual"
     }
   }
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    
+    /*btn.onclick = function() {
+      
+        var r = confirm("¿Estas seguro?");
+        if (r == true) {
+            //location.href= '/elim'
+            location.href= "/elim?key=" + s;
+            
+            
+            
+        } else {
+            location.href= "/actual"
+        }
+    }*/
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
 </script> 
 </html>

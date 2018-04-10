@@ -47,6 +47,17 @@ func (c *MainController) Get() {
 	c.Data["taula"] = &taulab
 	fmt.Println("Enviados al html")
 
+	flash := beego.ReadFromRequest(&c.Controller)
+	if _, ok := flash.Data["notice"]; ok {
+		// Display settings successful
+		//c.Redirect("/actual", 302)
+		c.TplName = "index.tpl"
+
+	} else if _, ok = flash.Data["error"]; ok {
+		// Display error messages
+		c.TplName = "error_elim.tpl"
+	}
+
 	c.TplName = "index.tpl"
 
 }
