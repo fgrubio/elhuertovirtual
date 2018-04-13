@@ -14,7 +14,7 @@ type JSONController struct {
 func (c *JSONController) Get() {
 	//var w http.ResponseWriter
 	//var r *http.Request
-	fmt.Println("Welcome!")
+	fmt.Println("Enviamos el json")
 	/*
 		todos := []models.Todo{
 			models.Todo{ID: 123},
