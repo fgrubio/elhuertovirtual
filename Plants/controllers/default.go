@@ -74,15 +74,16 @@ func (c *MainController) Ini() {
 	}
 }
 func (c *MainController) CreateTable() {
+	flash := beego.NewFlash()
 	if models.DB.HasTable("plantas") {
 		fmt.Println("Eliminamos existente")
 		models.DB.DropTable("plantas")
+		flash.Notice("Viciada Correctamente!")
+	} else {
+		flash.Notice("Creada Correctamente!")
 	}
 	fmt.Println("CreamosTabla")
 	var plantanueva models.Plantas
-
-	flash := beego.NewFlash()
-	flash.Notice("Creada Correctamente!")
 	flash.Store(&c.Controller)
 	models.DB.CreateTable(&plantanueva)
 	c.Redirect("/actual", 302)
