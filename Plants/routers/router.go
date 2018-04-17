@@ -23,5 +23,5 @@ func init() {
 	beego.Router("/historial", &controllers.PlantController{}, "get:Historial")
 	beego.Router("/random", &controllers.PlantController{}, "get:Random")
 
-	beego.Router("/todos", &controllers.JSONController{})
+	beego.Router("/json", &controllers.JSONController{})
 }

@@ -31,10 +31,12 @@
   <div align="left">
     <input type="button" onclick="location.href='/anade';" value="Añadir Planta" class="boton">
     <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
+    <input type="button" onclick="location.href='/json';" value="JSON" class="boton">
     <input type="button" onclick="eliminartabla()" value="Vaciar cultivo actual" class="boton">
     <input type="button" onclick="location.href='/random';" value="Random" class="boton3">
     
   </div>
+  
 
   <div class="divtable">
     <table>

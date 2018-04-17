@@ -224,3 +224,23 @@ tr:hover {
     text-decoration: none;
     cursor: pointer;
 }
+.boton_json{
+    overflow:hidden;
+    background-color: #4CAF50;
+    border: none;
+    color: black;
+    padding: 10px 30px;
+    text-align: right;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.5s;
+    font-size: 14px;
+}
+.boton_json:hover {
+    background: rgba(0,0,0,0);
+    color: #4CAF50;
+    box-shadow: inset 0 0 0 3px #4CAF50;
+}
