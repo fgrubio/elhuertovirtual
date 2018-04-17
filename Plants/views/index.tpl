@@ -9,7 +9,7 @@
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
   <link rel = 'stylesheet' href = '/static/css/es2.css'>
-   
+  <meta http-equiv="refresh" content="5">
 </head>
 
 <header>
