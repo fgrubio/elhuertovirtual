@@ -32,6 +32,7 @@ func (c *JSONController) Get() {
 			taulainsert.Cantidad = taula[i].Cantidad
 			taulainsert.Duracion = taula[i].Duracion
 			taulainsert.Seleccio = taula[i].Seleccio
+			//taulainsert.Temporizador = taula[i].Temporizador
 
 			mystruct = append(mystruct, taulainsert)
 		}

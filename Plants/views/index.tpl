@@ -9,7 +9,7 @@
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
   <link rel = 'stylesheet' href = '/static/css/es2.css'>
-   
+  <meta http-equiv= "refresh" content="30">
 </head>
 
 <header>
@@ -44,6 +44,7 @@
         <th>Tipo</th>
         <th>Cantidad</th>
         <th>Duración</th>
+        <th>Tiempo</th>
         <th></th>
         <th></th>
       </tr>
@@ -51,6 +52,7 @@
         <td class="td1">{{$val.Tipo}}</td>
         <td>{{$val.Cantidad}}</td>
         <td>{{$val.Duracion}} {{$val.Seleccio}}</td>
+        <td>{{$val.Temporizador}}h</td>
         <td>  
           <input type="button" onclick="editar({{$val.ID}})" value="Editar" class="boton2">
         </td>
@@ -61,6 +63,13 @@
       </tr>
         {{end}}
     </table>
+  </div>
+  <div class="crono_wrapper">
+
+	<h2 id='crono'>00:00:00</h2>
+
+	<input type="button" value="Empezar" onclick="empezarDetener(this);">
+
   </div>
       <!-- The Modal -->
     <div id="myModal" class="modal">
@@ -128,6 +137,68 @@
 			   modal.style.display = "block";
       }
 		}
-    
+
+	var inicio=0;
+	var timeout=0;
+
+ 	function empezarDetener(elemento)
+
+	{
+		if(timeout==0)
+
+		{
+			// empezar el cronometro
+
+ 			elemento.value="Detener";
+
+ 			// Obtenemos el valor actual
+
+			inicio=vuelta=new Date().getTime();
+
+ 			// iniciamos el proceso
+
+			funcionando();
+
+		}else{
+
+			// detemer el cronometro
+
+			elemento.value="Empezar";
+			clearTimeout(timeout);
+			timeout=0;
+
+		}
+
+	}
+
+	function funcionando()
+	{
+		// obteneos la fecha actual
+
+		var actual = new Date().getTime();
+
+		// obtenemos la diferencia entre la fecha actual y la de inicio
+
+		var diff=new Date(actual-inicio);
+
+		// mostramos la diferencia entre la fecha actual y la inicial
+
+		var result=LeadingZero(diff.getUTCHours())+":"+LeadingZero(diff.getUTCMinutes())+":"+LeadingZero(diff.getUTCSeconds());
+
+		document.getElementById('crono').innerHTML = result;
+
+		// Indicamos que se ejecute esta función nuevamente dentro de 1 segundo
+
+		timeout=setTimeout("funcionando()",1000);
+
+	}
+
+	/* Funcion que pone un 0 delante de un valor si es necesario */
+
+	function LeadingZero(Time) {
+
+		return (Time < 10) ? "0" + Time : + Time;
+
+	}
 </script> 
 </html>
