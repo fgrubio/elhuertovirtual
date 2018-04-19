@@ -18,7 +18,9 @@ func CreateDB() {
 	} else {
 		fmt.Println("BD CARGADA SIN ERRORES")
 	}
-
 	db.AutoMigrate(&Plantas{})
-	//defer db.Close()
+
+	db.AutoMigrate(&Cronos{})
+
+	db.AutoMigrate(&PlantasRecogidas{})
 }

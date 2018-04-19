@@ -9,7 +9,7 @@
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
   <link rel = 'stylesheet' href = '/static/css/es2.css'>
-  <!-- <meta http-equiv="refresh" content="30"> -->
+  <meta http-equiv="refresh" content="30">
 </head>
 
 <header>
@@ -30,9 +30,10 @@
   <div class="div1"></div>
   <div align="left">
     <input type="button" onclick="location.href='/anade';" value="Añadir Planta" class="boton">
+    <input type="button" onclick="location.href='/recogidas';" value="Cultivos Recogidos" class="boton">
     <input type="button" onclick="location.href='/historial';" value="Historial" class="boton">
     <input type="button" onclick="location.href='/json';" value="JSON" class="boton">
-    <input type="button" onclick="eliminartabla()" value="Vaciar cultivo actual" class="boton">
+    <input type="button" onclick="eliminartabla()" value="Reiniciar cultivo actual" class="boton">
     <input type="button" onclick="location.href='/random';" value="Random" class="boton3">
     
   </div>
@@ -44,6 +45,8 @@
         <th>Tipo</th>
         <th>Cantidad</th>
         <th>Duración</th>
+        <th>Quedan</th>
+        <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -51,13 +54,16 @@
         <td class="td1">{{$val.Tipo}}</td>
         <td>{{$val.Cantidad}}</td>
         <td>{{$val.Duracion}} {{$val.Seleccio}}</td>
+        <td>{{$val.Temporizador}} {{$val.SeleccioTemp}}</td>
         <td>  
           <input type="button" onclick="editar({{$val.ID}})" value="Editar" class="boton2">
         </td>
         <td>
           <input type="button" onclick="fuera({{$val.ID}})" value="Eliminar" class="boton2" id="myBtn">
         </td>
-
+         <td>
+          <input type="button" onclick="recogida({{$val.ID}})" value="Recoger" class="boton2" id="myBtn">
+        </td>
       </tr>
         {{end}}
     </table>
@@ -87,6 +93,18 @@
     if (r == true) {
         //location.href= '/elim'
         location.href= "/elim?key=" + s;
+                
+    } else {
+        location.href= "/actual"
+    }
+
+    //document.getElementById("demo").innerHTML = txt;
+  }
+  function recogida(s) {
+    var r = confirm("¿Estas seguro?");
+    if (r == true) {
+        //location.href= '/elim'
+        location.href= "/recoger?key=" + s;
                 
     } else {
         location.href= "/actual"

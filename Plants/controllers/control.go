@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
+	"time"
 
 	"github.com/astaxie/beego"
 )
@@ -140,7 +141,7 @@ func (c *PlantController) Crear() {
 	planta.Cantidad, _ = c.GetInt("cantidad")
 	planta.Duracion, _ = c.GetInt("duracion")
 	planta.Seleccio = c.GetString("seleccio")
-	planta.Temporizador = -1
+	planta.Temporizador = 0
 
 	fmt.Println("En seleccio esta esto:", planta.Seleccio)
 
@@ -295,16 +296,6 @@ func (c *PlantController) Update() {
 			}
 		}
 	}
-	//NEWWW
-	/*if planta.Cantidad == 0 {
-		fmt.Println("Cantidad 0")
-		fmt.Println("Error de Update")
-		c.Data["taula"] = &planta
-		c.TplName = "error4.tpl"
-	} else {
-		models.Actualitzar(planta)
-		c.Redirect("/actual", 302)
-	}*/
 }
 func (c *PlantController) ErrorUpdate() {
 	fmt.Println("Error de Update")
@@ -329,6 +320,43 @@ func (c *PlantController) Historial() {
 	fmt.Println("Enviados al html")
 	c.TplName = "historial.tpl"
 }
+func (c *PlantController) Recoger() {
+	fmt.Println("Entramos en Recoger")
+	integ, _ := c.GetInt("key")
+
+	var planta models.Plantas
+	models.DB.Table("plantas").Select("id,created_at,updated_at,tipo,cantidad,temporizador").Where("id = ?", integ).Scan(&planta)
+
+	var nuevaplantarecogida models.PlantasRecogidas
+	nuevaplantarecogida.ID = planta.ID
+	nuevaplantarecogida.Plantada = planta.CreatedAt
+	nuevaplantarecogida.Recogida = time.Now()
+	nuevaplantarecogida.Tipo = planta.Tipo
+	nuevaplantarecogida.Cantidad = planta.Cantidad
+	nuevaplantarecogida.Duracion = planta.Temporizador
+	models.AfegirRecogida(nuevaplantarecogida)
+	models.Borrar(int(planta.ID))
+	c.Redirect("/actual", 302)
+}
+func (c *PlantController) Recogidas() {
+	fmt.Println("Recogidas")
+	var taula []models.PlantasRecogidas
+	models.DB.Table("plantas_recogidas").Select("id,plantada,recogida,tipo,cantidad,duracion").Scan(&taula)
+	for i := 0; i < len(taula); i++ {
+		if taula[i].Duracion > 720 {
+			taula[i].Seleccio = "Mes/es"
+			taula[i].Duracion /= 720
+		} else if taula[i].Duracion > 24 {
+			taula[i].Seleccio = "Dia/s"
+			taula[i].Duracion /= 24
+		} else {
+			taula[i].Seleccio = "Hora/s"
+		}
+	}
+	c.Data["taula"] = &taula
+	fmt.Println("Enviados al html")
+	c.TplName = "recogidas.tpl"
+}
 func (c *PlantController) Random() {
 	fmt.Println("Entramos en Random")
 	var random int
@@ -347,7 +375,7 @@ func (c *PlantController) Random() {
 	planta.Cantidad = 1
 	planta.Duracion = 2
 	planta.Seleccio = "Dias"
-	planta.Temporizador = -1
+	planta.Temporizador = 0
 	fmt.Println("Se añade la planta:", planta)
 
 	models.Afegir(planta)

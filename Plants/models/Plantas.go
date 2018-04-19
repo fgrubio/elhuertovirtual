@@ -1,6 +1,8 @@
 package models
 
 import (
+	"time"
+
 	"github.com/jinzhu/gorm"
 )
 
@@ -15,6 +17,16 @@ type Plantas struct {
 	//Fecha_fin int
 }
 
+type PlantasRecogidas struct {
+	gorm.Model
+	Tipo     string `gorm:"primary_key"`
+	Plantada time.Time
+	Recogida time.Time
+	Cantidad int
+	Duracion int
+	Seleccio string
+}
+
 type Tabla struct {
 	//gorm.Model
 	ID           uint
@@ -23,12 +35,14 @@ type Tabla struct {
 	Duracion     int
 	Seleccio     string
 	Temporizador int
+	SeleccioTemp string
 }
 
 func Actualitzar(pl Plantas) {
-	//fmt.Println("Actualizamos")
-	//fmt.Println(pl)
-	DB.Model(&Plantas{}).Where("id = ?", pl.ID).Updates(map[string]interface{}{"tipo": pl.Tipo, "Cantidad": pl.Cantidad, "Duracion": pl.Duracion, "Seleccio": pl.Seleccio, "Temporizador": pl.Temporizador})
+	DB.Model(&Plantas{}).Where("id = ?", pl.ID).Updates(map[string]interface{}{"tipo": pl.Tipo, "Cantidad": pl.Cantidad, "Duracion": pl.Duracion, "Seleccio": pl.Seleccio})
+}
+func ActualitzarTempo(idnew uint, tempnew int) {
+	DB.Model(&Plantas{}).Where("id = ?", idnew).Updates(map[string]interface{}{"Temporizador": tempnew})
 }
 
 func Borrar(id int) {
@@ -36,5 +50,9 @@ func Borrar(id int) {
 }
 
 func Afegir(pl Plantas) {
+	DB.Create(&pl)
+}
+
+func AfegirRecogida(pl PlantasRecogidas) {
 	DB.Create(&pl)
 }

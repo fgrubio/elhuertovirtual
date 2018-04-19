@@ -3,6 +3,7 @@ package controllers
 import (
 	"elhuertovirtual/Plants/models"
 	"fmt"
+	"time"
 
 	"github.com/astaxie/beego"
 )
@@ -12,30 +13,34 @@ type MainController struct {
 }
 
 func (c *MainController) Get() {
-	//c.Data["Website"] = "beego.me"
-	//c.Data["Email"] = "astaxie@gmail.com"
-
 	fmt.Println("entramos default")
 
 	var taula []models.Plantas
 	models.DB.Table("plantas").Select("id,deleted_at,tipo,cantidad,duracion,seleccio,temporizador").Scan(&taula)
-	//fmt.Println("tamaño de la tabla: ", len(taula))
+
+	var tiempoviejo models.Cronos
+	models.DB.Table("cronos").Select("actual").Where("num = ?", "1").Scan(&tiempoviejo)
+	templus := false
+	tiempoactual := time.Now()
+	if temp := time.Duration(60) * time.Second; temp < tiempoactual.Sub(tiempoviejo.Actual) {
+		fmt.Println(tiempoactual.Sub(tiempoviejo.Actual), "-> Toca Actualizar")
+		models.ActualitzarCrono(tiempoactual)
+		templus = true
+	}
 
 	var taulab []models.Tabla
-	//fmt.Println("empezamos bucle")
-	//var taulainsert models.Tabla
 	for i := 0; i < len(taula); i++ {
-		//fmt.Println(i, ": Començem")
-		//fmt.Println(taula[i].DeletedAt)
 		if taula[i].DeletedAt == nil {
-			//fmt.Println("No eliminat, metemos, valor a copiar: ", taula[i])
 			var taulainsert models.Tabla
 			taulainsert.ID = taula[i].ID
 			taulainsert.Tipo = taula[i].Tipo
 			taulainsert.Cantidad = taula[i].Cantidad
 			taulainsert.Duracion = taula[i].Duracion
 			taulainsert.Seleccio = taula[i].Seleccio
-			taula[i].Temporizador++
+			if templus {
+				taula[i].Temporizador++
+				models.ActualitzarTempo(taula[i].ID, taula[i].Temporizador)
+			}
 			mul := 0
 			if taula[i].Seleccio == "Dias" {
 				mul = 24
@@ -45,9 +50,18 @@ func (c *MainController) Get() {
 				mul = 24 * 30 * 12
 			}
 			taulainsert.Temporizador = taula[i].Duracion*mul - taula[i].Temporizador
-			//fmt.Println(taulainsert)
-			//fmt.Println(taulab)
-			models.Actualitzar(taula[i])
+			if taulainsert.Temporizador/720 > 1 {
+				taulainsert.Temporizador /= 720
+				taulainsert.SeleccioTemp = "Mes/es"
+			} else if taulainsert.Temporizador/48 > 1 {
+				taulainsert.Temporizador /= 24
+				taulainsert.SeleccioTemp = "Dia/s"
+			} else if taulainsert.Temporizador > 0 {
+				taulainsert.SeleccioTemp = "Hora/s"
+			} else {
+				taulainsert.Temporizador = 0
+				taulainsert.SeleccioTemp = "YA ESTA CULTIVADO"
+			}
 			taulab = append(taulab, taulainsert)
 		}
 		//fmt.Println(i, ": saltem")
@@ -59,22 +73,16 @@ func (c *MainController) Get() {
 
 	flash := beego.ReadFromRequest(&c.Controller)
 	if _, ok := flash.Data["notice"]; ok {
-		// Display settings successful
-		//c.Redirect("/actual", 302)
 		c.TplName = "index.tpl"
 
 	} else if _, ok = flash.Data["error"]; ok {
-		// Display error messages
 		c.TplName = "error_elim.tpl"
 	}
 
 	c.TplName = "index.tpl"
-
 }
-func (c *MainController) Ini() {
-	//c.Data["Website"] = "beego.me"
-	//c.Data["Email"] = "astaxie@gmail.com"
 
+func (c *MainController) Ini() {
 	fmt.Println("entramos en el Inicio")
 	if models.DB.HasTable("plantas") {
 		fmt.Println("Se ha detectado tabla existente")
@@ -83,18 +91,33 @@ func (c *MainController) Ini() {
 		c.TplName = "inicioSin.tpl"
 	}
 }
+
 func (c *MainController) CreateTable() {
 	flash := beego.NewFlash()
 	if models.DB.HasTable("plantas") {
 		fmt.Println("Eliminamos existente")
 		models.DB.DropTable("plantas")
+		models.DB.DropTable("cronos")
+		models.DB.DropTable("plantas_recogidas")
 		flash.Notice("Viciada Correctamente!")
 	} else {
 		flash.Notice("Creada Correctamente!")
 	}
-	fmt.Println("CreamosTabla")
-	var plantanueva models.Plantas
 	flash.Store(&c.Controller)
+	fmt.Println("CreamosTabla")
+
+	var plantanueva models.Plantas
 	models.DB.CreateTable(&plantanueva)
+
+	var plantarecogida models.PlantasRecogidas
+	models.DB.CreateTable(&plantarecogida)
+
+	var hora models.Cronos
+	models.DB.CreateTable(&hora)
+	var actual models.Cronos
+	actual.Num = 1
+	actual.Actual = time.Now()
+	models.DB.Create(&actual)
+
 	c.Redirect("/actual", 302)
 }
