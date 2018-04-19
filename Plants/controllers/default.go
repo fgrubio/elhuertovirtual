@@ -14,7 +14,7 @@ type MainController struct {
 
 func (c *MainController) Get() {
 	fmt.Println("entramos default")
-
+	speed, _ := c.GetInt("speed")
 	var taula []models.Plantas
 	models.DB.Table("plantas").Select("id,deleted_at,tipo,cantidad,duracion,seleccio,temporizador").Scan(&taula)
 
@@ -69,6 +69,7 @@ func (c *MainController) Get() {
 
 	fmt.Println("Valores de la BD cargados")
 	c.Data["taula"] = &taulab
+	c.Data["speed"] = &speed
 	fmt.Println("Enviados al html")
 
 	flash := beego.ReadFromRequest(&c.Controller)
@@ -119,5 +120,5 @@ func (c *MainController) CreateTable() {
 	actual.Actual = time.Now()
 	models.DB.Create(&actual)
 
-	c.Redirect("/actual", 302)
+	c.Redirect("/actual?speed=2", 302)
 }

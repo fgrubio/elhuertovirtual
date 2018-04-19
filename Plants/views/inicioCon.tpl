@@ -26,7 +26,7 @@
 <h2 class="hey">¿Que desea hacer?</h2>
 <br><br>
 <div align="center">
-  <input type="button" onclick="location.href='/actual';" value="Seguir con el actual" class="boton">
+  <input type="button" onclick="location.href='/actual?speed=2';" value="Seguir con el actual" class="boton">
   <input type="button" onclick="fuera()" value="Eliminar actual y empezar de nuevo" class="boton">
 </div>
 </body>

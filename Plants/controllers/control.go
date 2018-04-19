@@ -273,7 +273,7 @@ func (c *PlantController) Update() {
 			models.Actualitzar(planta)
 			flash.Notice("Todo Salvado!")
 			flash.Store(&c.Controller)
-			c.Redirect("/actual", 302)
+			c.Redirect("/actual?speed=8", 302)
 		} else {
 			for i := 0; i < len(plantab) && hayuno == false; i++ {
 				if plantab[i].DeletedAt == nil && planta.ID != plantab[i].ID {

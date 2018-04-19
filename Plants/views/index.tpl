@@ -8,8 +8,8 @@
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
-  <link rel = 'stylesheet' href = '/static/css/es2.css'>
-  <meta http-equiv="refresh" content="30">
+  <link rel = 'stylesheet' href = '/static/css/es4.css'>
+  <meta http-equiv="refresh" content="15">
 </head>
 
 <header>
@@ -78,8 +78,16 @@
       </div>
     </div>
 
-  <footer align="center">
-    <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
+  <footer>
+  <div class="div2"></div>
+      <div class="slidecontainer" align="center">
+      <d class="td2"> Velocidad: </d>
+        <input type="range" min="0" max="60" value="{{.speed}}" class="slider" id="myRange">
+        <d class="td2"> 1 Hora cada <span id="demo">{{.speed}}</span> Segundo/s </d>
+      </div>
+      <div align="left">
+        <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
+     </div>
   </footer>
 
 </body>
@@ -146,6 +154,14 @@
 			   modal.style.display = "block";
       }
 		}
-    
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+      location.href= "/actual?speed=" + this.value;
+    }
 </script> 
 </html>

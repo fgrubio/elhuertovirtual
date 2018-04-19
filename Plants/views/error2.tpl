@@ -10,7 +10,7 @@
 </head>
 <header>
   <div class="topnav">
-    <a href="/actual">
+    <a href="/actual?speed=2">
     <img src="https://image.flaticon.com/icons/svg/17/17699.svg" width="40" height="40">
     </a>
     <b href="">
