@@ -18,7 +18,7 @@ func (c *MainController) Get() {
 	fmt.Println("entramos default")
 
 	var taula []models.Plantas
-	models.DB.Table("plantas").Select("id,deleted_at,tipo,cantidad,duracion,seleccio").Scan(&taula)
+	models.DB.Table("plantas").Select("id,deleted_at,tipo,cantidad,duracion,seleccio,temporizador").Scan(&taula)
 	//fmt.Println("tamaño de la tabla: ", len(taula))
 
 	var taulab []models.Tabla
@@ -35,9 +35,19 @@ func (c *MainController) Get() {
 			taulainsert.Cantidad = taula[i].Cantidad
 			taulainsert.Duracion = taula[i].Duracion
 			taulainsert.Seleccio = taula[i].Seleccio
+			taula[i].Temporizador++
+			mul := 0
+			if taula[i].Seleccio == "Dias" {
+				mul = 24
+			} else if taula[i].Seleccio == "Meses" {
+				mul = 24 * 30
+			} else {
+				mul = 24 * 30 * 12
+			}
+			taulainsert.Temporizador = taula[i].Duracion*mul - taula[i].Temporizador
 			//fmt.Println(taulainsert)
 			//fmt.Println(taulab)
-
+			models.Actualitzar(taula[i])
 			taulab = append(taulab, taulainsert)
 		}
 		//fmt.Println(i, ": saltem")

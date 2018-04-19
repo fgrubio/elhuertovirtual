@@ -18,6 +18,7 @@ type Todo struct {
 	Cantidad int    `json:"cantidad"`
 	Duracion int    `json:"duracion"`
 	Seleccio string `json:"seleccio"`
+	//Temporizador int    `json:"time"`
 }
 
 type Todos []Todo

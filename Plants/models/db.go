@@ -20,13 +20,5 @@ func CreateDB() {
 	}
 
 	db.AutoMigrate(&Plantas{})
-
-	/* PARA INICIALIZAR*/ /*
-		var p1 Plantas
-		p1.Tipo = "Prueba"
-		p1.Cantidad = 1
-		p1.Duracion = 1
-		DB.Create(&p1)
-	*/
 	//defer db.Close()
 }

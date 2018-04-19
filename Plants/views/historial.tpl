@@ -26,7 +26,7 @@
 </header>
 <body>
   <div class="div1"></div>
-  <div class="divtable">
+  <div>
     <table>
       <tr>
         <th>Tipo</th>

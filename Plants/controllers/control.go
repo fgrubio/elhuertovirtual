@@ -38,6 +38,7 @@ func (c *PlantController) Elim2() {
 	planta.Cantidad, _ = c.GetInt("cantidad")
 	planta.Duracion, _ = c.GetInt("duracion")
 	planta.Seleccio = c.GetString("seleccio")
+
 	//planta.Fecha_ini =
 	//planta.Fecha_fin =
 	fmt.Println("añadimos: ", planta)
@@ -80,7 +81,7 @@ func (c *PlantController) Edit() {
 		//CODI VELL
 		fmt.Println("Via normal")
 		var taula models.Plantas
-		models.DB.Table("plantas").Select("id,tipo,cantidad,duracion,seleccio").Where("id = ?", key).Scan(&taula)
+		models.DB.Table("plantas").Select("id,tipo,cantidad,duracion,seleccio,temporizador").Where("id = ?", key).Scan(&taula)
 		var planta models.Plantas
 		planta.Tipo = c.GetString("tipo")
 		planta.Cantidad, _ = c.GetInt("cantidad")
@@ -119,6 +120,7 @@ func (c *PlantController) Añade() {
 		planta.Cantidad, _ = c.GetInt("cantidad")
 		planta.Duracion, _ = c.GetInt("duracion")
 		planta.Seleccio = c.GetString("seleccio")
+
 		c.Data["taula"] = &planta
 		fmt.Println(planta)
 		if planta.Seleccio == "" {
@@ -127,7 +129,7 @@ func (c *PlantController) Añade() {
 			c.TplName = "añadir2.tpl"
 		}
 		var taula []models.Plantas
-		models.DB.Table("plantas").Select("tipo,cantidad,duracion,seleccio").Scan(&taula)
+		models.DB.Table("plantas").Select("tipo,cantidad,duracion,seleccio,temporizador").Scan(&taula)
 	}
 }
 func (c *PlantController) Crear() {
@@ -138,9 +140,10 @@ func (c *PlantController) Crear() {
 	planta.Cantidad, _ = c.GetInt("cantidad")
 	planta.Duracion, _ = c.GetInt("duracion")
 	planta.Seleccio = c.GetString("seleccio")
+	planta.Temporizador = -1
+
 	fmt.Println("En seleccio esta esto:", planta.Seleccio)
-	//planta.Fecha_ini =
-	//planta.Fecha_fin =
+
 	flash := beego.NewFlash()
 	if planta.Tipo == "" && planta.Cantidad == 0 {
 		fmt.Println("ERROR: Tipo = 0 y Cantidad 0")
@@ -194,7 +197,7 @@ func (c *PlantController) Crear() {
 		} else {
 			for i := 0; i < len(plantab) && hayuno == false; i++ {
 				if plantab[i].DeletedAt == nil {
-					fmt.Println("Se ha encontrado, NO se añade")
+					fmt.Println("Se ha encontrado, No se añade")
 					hayuno = true
 					fmt.Println("Error de Update")
 					fmt.Println("id = ", plantab[i].ID)
@@ -309,7 +312,7 @@ func (c *PlantController) ErrorUpdate() {
 	fmt.Println("id = ", key)
 
 	var taula models.Plantas
-	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion,seleccio").Where("id = ?", key).Scan(&taula)
+	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion,seleccio,temporizador").Where("id = ?", key).Scan(&taula)
 	c.Data["planta"] = &taula
 	fmt.Println(taula)
 	c.TplName = "error.tpl"
@@ -317,7 +320,7 @@ func (c *PlantController) ErrorUpdate() {
 func (c *PlantController) Historial() {
 	fmt.Println("Historial")
 	var taula []models.Plantas
-	models.DB.Table("plantas").Select("id,created_at,updated_at,deleted_at,tipo,cantidad,duracion,seleccio").Scan(&taula)
+	models.DB.Table("plantas").Select("id,created_at,updated_at,deleted_at,tipo,cantidad,duracion,seleccio,temporizador").Scan(&taula)
 
 	//fmt.Println(taula[1].Cantidad)
 	//fmt.Println(taula[1].Duracion)
@@ -338,14 +341,15 @@ func (c *PlantController) Random() {
 			igual = false
 		}
 	}
+
 	var planta models.Plantas
 	planta.Tipo = strconv.Itoa(random) + "Plant"
 	planta.Cantidad = 1
 	planta.Duracion = 2
 	planta.Seleccio = "Dias"
+	planta.Temporizador = -1
 	fmt.Println("Se añade la planta:", planta)
-	//planta.Fecha_ini =
-	//planta.Fecha_fin =
+
 	models.Afegir(planta)
 	c.Redirect("/actual", 302)
 }
