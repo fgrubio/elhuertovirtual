@@ -119,17 +119,12 @@
     //document.getElementById("demo").innerHTML = txt;
   }
 function recogida(s) {
-    if (s.Temporizador == 0){
       var r = confirm("¿Estas seguro?");
       if (r == true) {
-          //location.href= '/elim'
-          location.href= "/recoger?key=" + s.ID;
-                  
+          location.href= "/recoger?key=" + s;       
       } else {
           location.href= "/actual"
-      }
-    }
-    
+      }    
   }
 
   function eliminartabla() {

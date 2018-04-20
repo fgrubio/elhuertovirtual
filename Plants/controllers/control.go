@@ -383,6 +383,7 @@ func (c *PlantController) Historial() {
 func (c *PlantController) Recoger() {
 	fmt.Println("Entramos en Recoger")
 	integ, _ := c.GetInt("key")
+	fmt.Println(integ)
 
 	var planta models.Plantas
 	models.DB.Table("plantas").Select("id,tipo,cantidad,temporizador,plantada").Where("id = ?", integ).Scan(&planta)
