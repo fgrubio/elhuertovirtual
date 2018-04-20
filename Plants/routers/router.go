@@ -25,5 +25,7 @@ func init() {
 	beego.Router("/recoger", &controllers.PlantController{}, "get:Recoger")
 	beego.Router("/recogidas", &controllers.PlantController{}, "get:Recogidas")
 
+	beego.Router("/speed", &controllers.PlantController{}, "get:Speed")
+
 	beego.Router("/json", &controllers.JSONController{})
 }

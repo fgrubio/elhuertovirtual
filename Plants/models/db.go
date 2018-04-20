@@ -21,6 +21,7 @@ func CreateDB() {
 	db.AutoMigrate(&Plantas{})
 
 	db.AutoMigrate(&Cronos{})
+	ActualitzarSpeed(1)
 
 	db.AutoMigrate(&PlantasRecogidas{})
 }

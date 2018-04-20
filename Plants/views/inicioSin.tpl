@@ -7,7 +7,7 @@
   <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/15/15739.png" 
   type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:800">
-  <link rel = 'stylesheet' href = '/static/css/esInicio1.css'>
+  <link rel = 'stylesheet' href = '/static/css/esInicio2.css'>
    
 </head>
 <header>
@@ -27,8 +27,9 @@
 <div align="center">
   <input type="button" onclick="location.href='/createtable';" value="Crearlo" class="boton">
 </div>
-</body>
 <footer align="center">
   <h1><img src="https://png.icons8.com/metro/1600/copyright.png" width="9" height="9"/>    by Felipe and David for Sparsity </h1>
 </footer>
+
+</body>
 </html>

@@ -1,8 +1,6 @@
 package models
 
 import (
-	"time"
-
 	"github.com/jinzhu/gorm"
 )
 
@@ -13,6 +11,7 @@ type Plantas struct {
 	Duracion     int
 	Seleccio     string
 	Temporizador int //es en horas
+	Plantada     int
 	//Fecha_ini int
 	//Fecha_fin int
 }
@@ -20,11 +19,10 @@ type Plantas struct {
 type PlantasRecogidas struct {
 	gorm.Model
 	Tipo     string `gorm:"primary_key"`
-	Plantada time.Time
-	Recogida time.Time
 	Cantidad int
 	Duracion int
-	Seleccio string
+	Plantada int
+	Recogida int
 }
 
 type Tabla struct {
@@ -36,6 +34,21 @@ type Tabla struct {
 	Seleccio     string
 	Temporizador int
 	SeleccioTemp string
+	PlantadaDia  int
+	PlantadaHora int
+}
+
+type TablaPlantada struct {
+	//gorm.Model
+	ID           uint
+	Tipo         string
+	Cantidad     int
+	DuracionDia  int
+	DuracionHora int
+	PlantadaDia  int
+	PlantadaHora int
+	RecogidaDia  int
+	RecogidaHora int
 }
 
 func Actualitzar(pl Plantas) {

@@ -13,15 +13,16 @@
 </head>
 <header>
   <div class="topnav">
-      <a href="/actual?speed=2">
+      <a href="/actual">
         <img src="https://image.flaticon.com/icons/svg/17/17699.svg" width="40" height="40">
       </a>
       <b href="">
         <img src="https://image.flaticon.com/icons/png/512/15/15739.png" width="40" height="40">
       </b>
       <b href="">Mi Huerto</b>
+      <c href="">Dia {{.dia}}, {{.hora}}:00h</c>
       <c href="">|</c>
-      <c href="">Cultivos Recogidos</c>
+      <c href="">Cultivos Almacenados</c>
   </div>
 </header>
 <body>
@@ -39,9 +40,9 @@
     {{range $key, $val := .taula}}
       <td  class="td1">{{$val.Tipo}}</td>
       <td>{{$val.Cantidad}}</td>
-      <td>{{$val.Plantada}}</td>
-      <td>{{$val.Recogida}}</td>
-      <td>{{$val.Duracion}} {{$val.Seleccio}}</td>
+      <td>Dia {{$val.PlantadaDia}}, {{$val.PlantadaHora}}:00h</td>
+      <td>Dia {{$val.RecogidaDia}}, {{$val.RecogidaHora}}:00h</td>
+      <td>{{$val.DuracionDia}} Dias y {{$val.DuracionHora}}h</td>
       <td></td>
     </tr>
       {{end}}

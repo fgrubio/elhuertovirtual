@@ -14,21 +14,32 @@ type MainController struct {
 
 func (c *MainController) Get() {
 	fmt.Println("entramos default")
-	speed, _ := c.GetInt("speed")
+
 	var taula []models.Plantas
-	models.DB.Table("plantas").Select("id,deleted_at,tipo,cantidad,duracion,seleccio,temporizador").Scan(&taula)
+	models.DB.Table("plantas").Select("id,deleted_at,tipo,cantidad,duracion,seleccio,temporizador,plantada").Scan(&taula)
 
 	var tiempoviejo models.Cronos
-	models.DB.Table("cronos").Select("actual").Where("num = ?", "1").Scan(&tiempoviejo)
+	models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+	speed := tiempoviejo.Speed
+	fmt.Println("Speed de", speed)
 	templus := false
 	tiempoactual := time.Now()
 	if temp := time.Duration(60) * time.Second; temp < tiempoactual.Sub(tiempoviejo.Actual) {
-		fmt.Println(tiempoactual.Sub(tiempoviejo.Actual), "-> Toca Actualizar")
+		if temp := time.Duration(90) * time.Second; temp < tiempoactual.Sub(tiempoviejo.Actual) {
+			fmt.Println(tiempoactual.Sub(tiempoviejo.Actual), "-> NO Actualizamos")
+		} else {
+			fmt.Println(tiempoactual.Sub(tiempoviejo.Actual), "-> Toca Actualizar")
+			templus = true
+			tiempoviejo.Horareal += speed
+			models.ActualitzarHora(tiempoviejo.Horareal)
+		}
 		models.ActualitzarCrono(tiempoactual)
-		templus = true
+	} else {
+		fmt.Println(tiempoactual.Sub(tiempoviejo.Actual), "-> NO Actualizamos")
 	}
 
 	var taulab []models.Tabla
+	var taulac []models.Tabla
 	for i := 0; i < len(taula); i++ {
 		if taula[i].DeletedAt == nil {
 			var taulainsert models.Tabla
@@ -37,8 +48,10 @@ func (c *MainController) Get() {
 			taulainsert.Cantidad = taula[i].Cantidad
 			taulainsert.Duracion = taula[i].Duracion
 			taulainsert.Seleccio = taula[i].Seleccio
+			taulainsert.PlantadaDia = taula[i].Plantada / 24
+			taulainsert.PlantadaHora = taula[i].Plantada % 24
 			if templus {
-				taula[i].Temporizador++
+				taula[i].Temporizador += speed
 				models.ActualitzarTempo(taula[i].ID, taula[i].Temporizador)
 			}
 			mul := 0
@@ -58,18 +71,25 @@ func (c *MainController) Get() {
 				taulainsert.SeleccioTemp = "Dia/s"
 			} else if taulainsert.Temporizador > 0 {
 				taulainsert.SeleccioTemp = "Hora/s"
-			} else {
-				taulainsert.Temporizador = 0
-				taulainsert.SeleccioTemp = "YA ESTA CULTIVADO"
 			}
-			taulab = append(taulab, taulainsert)
+			if taulainsert.Temporizador <= 0 {
+				taulainsert.Temporizador = 0
+				taulainsert.SeleccioTemp = "YA ESTA LISTO ;)"
+				taulac = append(taulac, taulainsert)
+			} else {
+				taulab = append(taulab, taulainsert)
+			}
 		}
-		//fmt.Println(i, ": saltem")
 	}
 
 	fmt.Println("Valores de la BD cargados")
 	c.Data["taula"] = &taulab
+	c.Data["recogida"] = &taulac
 	c.Data["speed"] = &speed
+	dia := tiempoviejo.Horareal / 24
+	hora := tiempoviejo.Horareal % 24
+	c.Data["dia"] = &dia
+	c.Data["hora"] = &hora
 	fmt.Println("Enviados al html")
 
 	flash := beego.ReadFromRequest(&c.Controller)
@@ -118,7 +138,10 @@ func (c *MainController) CreateTable() {
 	var actual models.Cronos
 	actual.Num = 1
 	actual.Actual = time.Now()
+	actual.Speed = 1
+	actual.Horareal = 24 //Empezamos por dia 1
+	fmt.Println(actual)
 	models.DB.Create(&actual)
 
-	c.Redirect("/actual?speed=2", 302)
+	c.Redirect("/actual", 302)
 }

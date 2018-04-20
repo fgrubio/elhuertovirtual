@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
-	"time"
 
 	"github.com/astaxie/beego"
 )
@@ -77,6 +76,12 @@ func (c *PlantController) Edit() {
 		planta.Seleccio, _ = flash.Data["Seleccion"]
 		fmt.Println(planta)
 		c.Data["taula"] = &planta
+		var tiempoviejo models.Cronos
+		models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+		dia := tiempoviejo.Horareal / 24
+		hora := tiempoviejo.Horareal % 24
+		c.Data["dia"] = &dia
+		c.Data["hora"] = &hora
 		c.TplName = "edit2.tpl"
 	} else {
 		//CODI VELL
@@ -95,11 +100,17 @@ func (c *PlantController) Edit() {
 			c.Data["taula"] = &planta
 		}
 		fmt.Println(taula)
+		var tiempoviejo models.Cronos
+		models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+		dia := tiempoviejo.Horareal / 24
+		hora := tiempoviejo.Horareal % 24
+		c.Data["dia"] = &dia
+		c.Data["hora"] = &hora
 		c.TplName = "edit.tpl"
 	}
 }
 func (c *PlantController) Añade() {
-	fmt.Println("hola he llegado al añadir")
+	fmt.Println("He llegado al añadir")
 	flash := beego.ReadFromRequest(&c.Controller)
 	if man, ok := flash.Data["error"]; ok {
 		fmt.Println("Error, ok =", ok)
@@ -114,6 +125,12 @@ func (c *PlantController) Añade() {
 		planta.Duracion, _ = strconv.Atoi(flash.Data["Duracion"])
 		planta.Seleccio, _ = flash.Data["Seleccion"]
 		c.Data["taula"] = &planta
+		var tiempoviejo models.Cronos
+		models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+		dia := tiempoviejo.Horareal / 24
+		hora := tiempoviejo.Horareal % 24
+		c.Data["dia"] = &dia
+		c.Data["hora"] = &hora
 		c.TplName = "añadir3.tpl"
 	} else {
 		var planta models.Plantas
@@ -121,7 +138,12 @@ func (c *PlantController) Añade() {
 		planta.Cantidad, _ = c.GetInt("cantidad")
 		planta.Duracion, _ = c.GetInt("duracion")
 		planta.Seleccio = c.GetString("seleccio")
-
+		var tiempoviejo models.Cronos
+		models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+		dia := tiempoviejo.Horareal / 24
+		hora := tiempoviejo.Horareal % 24
+		c.Data["dia"] = &dia
+		c.Data["hora"] = &hora
 		c.Data["taula"] = &planta
 		fmt.Println(planta)
 		if planta.Seleccio == "" {
@@ -142,12 +164,21 @@ func (c *PlantController) Crear() {
 	planta.Duracion, _ = c.GetInt("duracion")
 	planta.Seleccio = c.GetString("seleccio")
 	planta.Temporizador = 0
+	var tiempo models.Cronos
+	models.DB.Table("cronos").Select("horareal").Where("num = ?", "1").Scan(&tiempo)
+	planta.Plantada = tiempo.Horareal
 
 	fmt.Println("En seleccio esta esto:", planta.Seleccio)
 
 	flash := beego.NewFlash()
 	if planta.Tipo == "" && planta.Cantidad == 0 {
 		fmt.Println("ERROR: Tipo = 0 y Cantidad 0")
+		var tiempoviejo models.Cronos
+		models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+		dia := tiempoviejo.Horareal / 24
+		hora := tiempoviejo.Horareal % 24
+		c.Data["dia"] = &dia
+		c.Data["hora"] = &hora
 		flash.Error("Mejor que pongas algun tipo y cantidad ;)")
 		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
 		flash.Data["Tipo"] = planta.Tipo
@@ -155,10 +186,16 @@ func (c *PlantController) Crear() {
 		flash.Data["Duracion"] = strconv.Itoa(planta.Duracion)
 		flash.Data["Seleccion"] = planta.Seleccio
 		flash.Store(&c.Controller)
-		c.Redirect("/edit", 302)
+		c.Redirect("/anade", 302)
 		return
 	} else if planta.Tipo == "" {
 		fmt.Println("ERROR: Tipo = 0")
+		var tiempoviejo models.Cronos
+		models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+		dia := tiempoviejo.Horareal / 24
+		hora := tiempoviejo.Horareal % 24
+		c.Data["dia"] = &dia
+		c.Data["hora"] = &hora
 		flash.Error("Mejor que pongas algun tipo ;)")
 		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
 		flash.Data["Tipo"] = planta.Tipo
@@ -166,7 +203,7 @@ func (c *PlantController) Crear() {
 		flash.Data["Duracion"] = strconv.Itoa(planta.Duracion)
 		flash.Data["Seleccion"] = planta.Seleccio
 		flash.Store(&c.Controller)
-		c.Redirect("/edit", 302)
+		c.Redirect("/anade", 302)
 		return
 	} else if planta.Cantidad == 0 {
 		fmt.Println("No se ha encontrado pero cantidad 0")
@@ -175,6 +212,12 @@ func (c *PlantController) Crear() {
 		//c.TplName = "error2.tpl"
 		fmt.Println("ERROR: Cantidad = 0")
 		flash.Error("Mejor que pongas algo de cantidad ;)")
+		var tiempoviejo models.Cronos
+		models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+		dia := tiempoviejo.Horareal / 24
+		hora := tiempoviejo.Horareal % 24
+		c.Data["dia"] = &dia
+		c.Data["hora"] = &hora
 		flash.Data["ID"] = strconv.FormatUint(uint64(planta.ID), 10)
 		flash.Data["Tipo"] = planta.Tipo
 		flash.Data["Cantidad"] = strconv.Itoa(planta.Cantidad)
@@ -202,6 +245,12 @@ func (c *PlantController) Crear() {
 					hayuno = true
 					fmt.Println("Error de Update")
 					fmt.Println("id = ", plantab[i].ID)
+					var tiempoviejo models.Cronos
+					models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+					dia := tiempoviejo.Horareal / 24
+					hora := tiempoviejo.Horareal % 24
+					c.Data["dia"] = &dia
+					c.Data["hora"] = &hora
 					c.Data["planta"] = &plantab[i]
 					c.Data["plantanueva"] = &planta
 					c.TplName = "error.tpl"
@@ -273,7 +322,7 @@ func (c *PlantController) Update() {
 			models.Actualitzar(planta)
 			flash.Notice("Todo Salvado!")
 			flash.Store(&c.Controller)
-			c.Redirect("/actual?speed=8", 302)
+			c.Redirect("/actual", 302)
 		} else {
 			for i := 0; i < len(plantab) && hayuno == false; i++ {
 				if plantab[i].DeletedAt == nil && planta.ID != plantab[i].ID {
@@ -302,6 +351,13 @@ func (c *PlantController) ErrorUpdate() {
 	key, _ := c.GetInt("key")
 	fmt.Println("id = ", key)
 
+	var tiempoviejo models.Cronos
+	models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+	dia := tiempoviejo.Horareal / 24
+	hora := tiempoviejo.Horareal % 24
+	c.Data["dia"] = &dia
+	c.Data["hora"] = &hora
+
 	var taula models.Plantas
 	models.DB.Table("plantas").Select("id,tipo,cantidad,duracion,seleccio,temporizador").Where("id = ?", key).Scan(&taula)
 	c.Data["planta"] = &taula
@@ -313,8 +369,12 @@ func (c *PlantController) Historial() {
 	var taula []models.Plantas
 	models.DB.Table("plantas").Select("id,created_at,updated_at,deleted_at,tipo,cantidad,duracion,seleccio,temporizador").Scan(&taula)
 
-	//fmt.Println(taula[1].Cantidad)
-	//fmt.Println(taula[1].Duracion)
+	var tiempoviejo models.Cronos
+	models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+	dia := tiempoviejo.Horareal / 24
+	hora := tiempoviejo.Horareal % 24
+	c.Data["dia"] = &dia
+	c.Data["hora"] = &hora
 
 	c.Data["taula"] = &taula
 	fmt.Println("Enviados al html")
@@ -325,37 +385,68 @@ func (c *PlantController) Recoger() {
 	integ, _ := c.GetInt("key")
 
 	var planta models.Plantas
-	models.DB.Table("plantas").Select("id,created_at,updated_at,tipo,cantidad,temporizador").Where("id = ?", integ).Scan(&planta)
-
+	models.DB.Table("plantas").Select("id,tipo,cantidad,temporizador,plantada").Where("id = ?", integ).Scan(&planta)
 	var nuevaplantarecogida models.PlantasRecogidas
 	nuevaplantarecogida.ID = planta.ID
-	nuevaplantarecogida.Plantada = planta.CreatedAt
-	nuevaplantarecogida.Recogida = time.Now()
 	nuevaplantarecogida.Tipo = planta.Tipo
 	nuevaplantarecogida.Cantidad = planta.Cantidad
 	nuevaplantarecogida.Duracion = planta.Temporizador
+	nuevaplantarecogida.Plantada = planta.Plantada
+
+	var tiempo models.Cronos
+	models.DB.Table("cronos").Select("horareal").Where("num = ?", "1").Scan(&tiempo)
+	nuevaplantarecogida.Recogida = tiempo.Horareal
+	fmt.Println(nuevaplantarecogida)
+
 	models.AfegirRecogida(nuevaplantarecogida)
 	models.Borrar(int(planta.ID))
 	c.Redirect("/actual", 302)
 }
 func (c *PlantController) Recogidas() {
-	fmt.Println("Recogidas")
+	fmt.Println("Entramos en Recogidas")
 	var taula []models.PlantasRecogidas
-	models.DB.Table("plantas_recogidas").Select("id,plantada,recogida,tipo,cantidad,duracion").Scan(&taula)
+	models.DB.Table("plantas_recogidas").Select("id,tipo,cantidad,duracion,plantada,recogida").Scan(&taula)
+
+	var plantas []models.TablaPlantada
 	for i := 0; i < len(taula); i++ {
-		if taula[i].Duracion > 720 {
-			taula[i].Seleccio = "Mes/es"
-			taula[i].Duracion /= 720
-		} else if taula[i].Duracion > 24 {
-			taula[i].Seleccio = "Dia/s"
-			taula[i].Duracion /= 24
-		} else {
-			taula[i].Seleccio = "Hora/s"
-		}
+		fmt.Println(taula[i])
+		var planta models.TablaPlantada
+		planta.ID = taula[i].ID
+		planta.Tipo = taula[i].Tipo
+		planta.Cantidad = taula[i].Cantidad
+		planta.DuracionDia = taula[i].Duracion / 24
+		planta.DuracionHora = taula[i].Duracion % 24
+		planta.PlantadaDia = taula[i].Plantada / 24
+		planta.PlantadaHora = taula[i].Plantada % 24
+		planta.RecogidaDia = taula[i].Recogida / 24
+		planta.RecogidaHora = taula[i].Recogida % 24
+		plantas = append(plantas, planta)
 	}
-	c.Data["taula"] = &taula
+	var tiempoviejo models.Cronos
+	models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+	dia := tiempoviejo.Horareal / 24
+	hora := tiempoviejo.Horareal % 24
+	c.Data["dia"] = &dia
+	c.Data["hora"] = &hora
+
+	c.Data["taula"] = &plantas
 	fmt.Println("Enviados al html")
 	c.TplName = "recogidas.tpl"
+}
+func (c *PlantController) Speed() {
+	speed, _ := c.GetInt("speed")
+	var speedold models.Cronos
+	models.DB.Table("cronos").Select("speed").Where("num = ?", "1").Scan(&speedold)
+	fmt.Println("Toca actualizar speed, actual", speedold.Speed)
+	if speed == 1 && speedold.Speed < 10 {
+		speedold.Speed++
+		fmt.Println("Speed+1, speed =", speedold.Speed)
+	} else if speed == 2 && speedold.Speed > 0 {
+		speedold.Speed--
+		fmt.Println("Speed-1, speed =", speedold.Speed)
+	}
+	models.ActualitzarSpeed(speedold.Speed)
+	c.Redirect("/actual", 302)
 }
 func (c *PlantController) Random() {
 	fmt.Println("Entramos en Random")
@@ -376,7 +467,10 @@ func (c *PlantController) Random() {
 	planta.Duracion = 2
 	planta.Seleccio = "Dias"
 	planta.Temporizador = 0
-	fmt.Println("Se añade la planta:", planta)
+	var tiempo models.Cronos
+	models.DB.Table("cronos").Select("horareal").Where("num = ?", "1").Scan(&tiempo)
+	planta.Plantada = tiempo.Horareal
+	fmt.Println("Se añade la planta:", planta, "a las:", tiempo.Horareal)
 
 	models.Afegir(planta)
 	c.Redirect("/actual", 302)

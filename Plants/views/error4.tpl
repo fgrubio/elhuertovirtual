@@ -10,13 +10,14 @@
 </head>
 <header>
   <div class="topnav">
-    <a href="/actual?speed=2">
+    <a href="/actual">
     <img src="https://image.flaticon.com/icons/svg/17/17699.svg" width="40" height="40">
     </a>
     <b href="">
     <img src="https://image.flaticon.com/icons/png/512/15/15739.png" width="40" height="40">
     </b>
     <b href="">Mi Huerto</b>
+    <c href="">Dia {{.dia}}, {{.hora}}:00h</c>
     <c href="">|</c>
     <c href="">Error al actualizar tipo {{.planta.Tipo}}</c>
   </div>

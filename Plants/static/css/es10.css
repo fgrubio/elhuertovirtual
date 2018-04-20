@@ -1,0 +1,381 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  padding: 0px;
+  font-size: 14px;
+  line-height: 20px;
+  background-color: #c1ff33;
+  line-height: 1.8;
+  height: 100%;
+  margin: 0;
+  margin-bottom: 40px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+/* Style the top navigation bar */
+header{
+    position: sticky;
+    top: 0;
+}
+.topnav {
+    overflow: hidden;
+    background-color: rgb(52, 122, 55);
+    color: white;
+    height: 70px;
+}
+/* Style the topnav links */
+.topnav a {
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    height: 70px;
+}
+.topnav b {
+    font-family: 'Montserrat', sans-serif; 
+    height: 70px;
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: normal;
+}
+.topnav c {
+    height: 70px;
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: normal;
+}
+/* Change color on hover */
+.topnav a:hover {
+    background-color: #c1ff33;
+    color: rgb(52, 122, 55);
+}
+
+/* Style the content */
+.content {
+    background-color: #ddd;
+    padding: 10px;
+}
+/* Style the footer */
+footer {
+    background-color: rgb(52, 122, 55);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 93px; 
+}
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 10px;
+    text-align: center;
+}
+.div1 {
+    width: 100%;
+    height: 35px;
+}
+.div2 {
+    width: 100%;
+    height: 10px;
+}
+/* MINEEE */
+.divtable {
+    border-collapse: collapse;
+    width: 100%;
+    height: 800px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    height: auto;
+    top: 0;
+}
+th, td {
+    text-align: left;
+    padding: 10px;
+    height: 20px;
+}
+td{
+    top: 0;
+}
+.td1{
+    font-weight: 900;
+    text-transform: uppercase;
+}
+.td3{
+    font-weight: 900;
+    text-transform: uppercase;
+}
+.trSS{
+    color: rgb(52, 122, 55);
+    background-color: rgb(240, 240, 240);
+}
+.trSS:nth-child(even){
+    color: rgb(52, 122, 55);    
+    background-color: white;
+}
+.trSS:hover {
+    background-color:#FFFFFF3a;
+}
+th {
+    background-color: #4caf50;
+    color: white;
+    border-bottom: 3px solid white;
+    font-size: 15px;
+}
+tr:nth-child(even){
+    background-color: #00000015;
+}
+tr:hover {
+    background-color:#0000003a;
+}
+.boton{
+    overflow:hidden;
+    background-color: #4CAF50;
+    border: none;
+    color: black;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.5s;
+    font-size: 14px;
+}
+.boton:hover {
+    background: rgba(0,0,0,0);
+    color: #4CAF50;
+    box-shadow: inset 0 0 0 3px #4CAF50;
+}
+.boton2{
+    overflow:hidden;
+    background-color: rgba(1, 15, 2, 0);
+    border: none;
+    padding: auto;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-size: 14px;
+}
+.boton2:hover {
+    color: white;
+}
+.boton3{
+    overflow:hidden;
+    background-color: rgba(76, 175, 79, 0);
+    border: none;
+    color: rgba(76, 175, 79, 0);
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.5s;
+    font-size: 14px;
+}
+.boton4 {
+    color: rgb(52, 122, 55);
+    font-weight: 900;
+    text-transform: uppercase;
+    overflow:hidden;
+    background-color: rgba(1, 15, 2, 0);
+    border: none;
+    padding: auto;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-size: 14px;
+}
+.boton4:hover {
+    color: white;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    font-size: 15px;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid #888;
+    width: 25%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.boton_json{
+    overflow:hidden;
+    background-color: #4CAF50;
+    border: none;
+    color: black;
+    padding: 10px 30px;
+    text-align: right;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.5s;
+    font-size: 14px;
+}
+.boton_json:hover {
+    background: rgba(0,0,0,0);
+    color: #4CAF50;
+    box-shadow: inset 0 0 0 3px #4CAF50;
+}
+
+#start-timer {
+    position: absolute;
+    width: 130px;
+    height: 20px;
+    top: 60px;
+    left: 25px;
+    cursor: pointer;
+}
+
+#stop-timer {
+    position: absolute;
+    width: 130px;
+    height: 20px;
+    top: 85px;
+    left: 25px;
+    cursor: pointer;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 500px;
+    height: 15px;
+    border-radius: 5px;   
+    background: rgb(83, 189, 86);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #c1ff33;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #c1ff33;
+    cursor: pointer;
+}
+.td2 {
+    color: #c1ff33;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 900;
+}
+.boton5 {
+    font-family: 'Montserrat', sans-serif; 
+    overflow:hidden;
+    background-color: #c1ff33;
+    border: none;
+    color: black;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.5s;
+    font-size: 17px;
+    font-weight: 900;
+}
+.boton5:hover {
+    background: rgba(0,0,0,0);
+    color: #c1ff33;
+    box-shadow: inset 0 0 0 3px #c1ff33;
+}
+.boton6 {
+    font-family: 'Montserrat', sans-serif; 
+    overflow:hidden;
+    background-color: #c1ff33;
+    border: none;
+    color: black;
+    padding: 10px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.5s;
+    font-size: 17px;
+    font-weight: 900;
+}
+.boton6:hover {
+    background: rgba(0,0,0,0);
+    color: #c1ff33;
+    box-shadow: inset 0 0 0 3px #c1ff33;
+}
