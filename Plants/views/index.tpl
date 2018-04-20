@@ -118,18 +118,20 @@
 
     //document.getElementById("demo").innerHTML = txt;
   }
-  function recogida(s) {
-    var r = confirm("¿Estas seguro?");
-    if (r == true) {
-        //location.href= '/elim'
-        location.href= "/recoger?key=" + s;
-                
-    } else {
-        location.href= "/actual"
+function recogida(s) {
+    if (s.Temporizador == 0){
+      var r = confirm("¿Estas seguro?");
+      if (r == true) {
+          //location.href= '/elim'
+          location.href= "/recoger?key=" + s.ID;
+                  
+      } else {
+          location.href= "/actual"
+      }
     }
-
-    //document.getElementById("demo").innerHTML = txt;
+    
   }
+
   function eliminartabla() {
     var r = confirm("¿Estas seguro que quieres eliminar la actual?");
     if (r == true) {
