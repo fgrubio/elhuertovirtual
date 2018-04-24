@@ -12,6 +12,16 @@ type JSONController struct {
 }
 
 func (c *JSONController) Get() {
+	var tiempoviejo models.Cronos
+	models.DB.Table("cronos").Select("actual,speed,horareal").Where("num = ?", "1").Scan(&tiempoviejo)
+	dia := tiempoviejo.Horareal / 24
+	hora := tiempoviejo.Horareal % 24
+	c.Data["dia"] = &dia
+	c.Data["hora"] = &hora
+	c.TplName = "json.tpl"
+}
+
+func (c *JSONController) Imprimir() {
 	fmt.Println("Enviamos el json")
 	var taula []models.Plantas
 	models.DB.Table("plantas").Select("id,deleted_at,tipo,cantidad,duracion,seleccio").Scan(&taula)
@@ -32,4 +42,5 @@ func (c *JSONController) Get() {
 	//models.DB.Table("plantas").Select("tipo,cantidad,duracion,seleccio").Scan(&mystruct)
 	c.Data["json"] = &mystruct
 	c.ServeJSON()
+
 }

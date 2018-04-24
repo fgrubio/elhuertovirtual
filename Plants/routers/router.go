@@ -28,4 +28,5 @@ func init() {
 	beego.Router("/speed", &controllers.PlantController{}, "get:Speed")
 
 	beego.Router("/json", &controllers.JSONController{})
+	beego.Router("/imprimir", &controllers.JSONController{}, "get:Imprimir")
 }
