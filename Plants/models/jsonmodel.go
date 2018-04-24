@@ -1,13 +1,11 @@
 package models
 
 type Todo struct {
-	//gorm.Model
-	//ID   uint   `json:"id"`
-	Tipo     string `json:"tipo"`
-	Cantidad int    `json:"cantidad"`
-	Duracion int    `json:"duracion"`
-	Seleccio string `json:"seleccio"`
-	//Temporizador int    `json:"time"`
+	Tipo      string `json:"tipo,omitempty"`
+	Fecha     int    `json:"fechaplantacion,omitempty"`
+	Cantidad  int    `json:"cantidad,omitempty"`
+	Duracion  int    `json:"duracion,omitempty"`
+	Seleccion string `json:"seleccion,omitempty"`
 }
 
 type Todos []Todo

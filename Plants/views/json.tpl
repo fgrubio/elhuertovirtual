@@ -24,25 +24,25 @@
 </header>
 <body>
 <div class = "div1"></div>
-  <form name="f1" id="f1" action="/imprimir" method="post" align="center">
-  <h2> <input type="checkbox" value="4" id="c4">Tipo<br> <div><br></div> </h2>
+  <form name="f1" id="f1" action="/imprimir" method="get" align="center">
+  <h2> <input type="checkbox" name="tipo" value="1" id="c4">Tipo<br> <div><br></div> </h2>
 
-   <h2><input type="checkbox" value="1" id="c1" onClick='desplegar()'>Fecha de Plantacion<br></h2>
+   <h2><input type="checkbox" name="fecha" value="1" id="c1" onClick='desplegar()'>Fecha de Plantacion<br></h2>
     <div style="visibility:hidden" id='div1'>
-   <input type="checkbox" value="1.1" id="c11"> Primera Semana
-   <input type="checkbox" value="1.2" id="c12"> Segunda Semana</div>
+   <input type="checkbox" name="primera"value="1" id="c11"> Solo Primera Semana
+   <input type="checkbox" name="segunda"value="1" id="c12"> Solo Segunda Semana</div>
 
-  <h2> <input type="checkbox" value="2" id="c2" onClick='desplegar()'>Duracion<br></h2>
+  <h2> <input type="checkbox" name="duracion" value="1" id="c2" onClick='desplegar()'>Duracion<br></h2>
     <div style="visibility:hidden" id='div2'>
-   <input type="checkbox" value="2.1" id="c21">Dias
-   <input type="checkbox" value="2.2" id="c22">Meses
-   <input type="checkbox" value="2.3" id="c23">Años </div>
+   <input type="checkbox" name="dia"value="1" id="c21">Dias
+   <input type="checkbox" name="mes"value="1" id="c22">Meses
+   <input type="checkbox" name="ano"value="1" id="c23">Años </div>
 
-   <h2><input type="checkbox" value="3" id="c3" onClick='desplegar()'>Cantidad<br></h2>
+   <h2><input type="checkbox" name="cantidad" value="1" id="c3" onClick='desplegar()'>Cantidad<br></h2>
     <div style="visibility:hidden" id='div3'>
-   <input type="checkbox" value="3.1" id="c31">Entre 1-50
-   <input type="checkbox" value="3.2" id="c32">Entre 51-100
-   <input type="checkbox" value="3.1" id="c31">Mas de 100</div>
+   <input type="checkbox" name="50"value="1" id="c31">Entre 1-50
+   <input type="checkbox" name="100"value="1" id="c32">Entre 51-100
+   <input type="checkbox" name="200"value="1" id="c31">Mas de 100</div>
    <input type="submit" value="Submit" class = "boton">
   </form>
 
